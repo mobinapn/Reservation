@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 
 from config import Config
 from app.extensions import db
