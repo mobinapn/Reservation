@@ -5,7 +5,7 @@ from config import Config
 from app.extensions import db
 from app.main import bp as main_bp
 from app.accounts import bp as accounts_bp
-from models.accounts import User
+from app.models.accounts import User
 
 def create_app(config_class=Config):
     app = Flask(__name__)

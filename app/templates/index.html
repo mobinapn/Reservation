@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home Page</title>
 </head>
 <body>
-    This is Home Page
+    {% if current_user.is_authenticated %}
+    Hello {{ current_user.firstname }} {{ current_user.lastname }}
+    <a href="/accounts/logout">Logout</a>
+    {% else %}
+    <a href="/accounts/login">Login</a>
+    <a href="/accounts/signup">Signup</a>
+    {% endif %}
 </body>
 </html>

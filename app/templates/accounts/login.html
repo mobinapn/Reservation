@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Page</title>
 </head>
 <body>
-    This is Login Page
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {{ messages.0 }}
+    {% endif %}
+    {% endwith %}
+    <form action="/accounts/login" method="post">
+        <label for="phone">Phone Number:</label><br>
+        <input type="text" id="phone" name="phone" placeholder="Enter Your Phone Number"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter Your Password"><br><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
