@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ current_user.firstname }} {{ current_user.lastname }} Profile</title>
+</head>
+<body>
+    <form action="/accounts/profile" method="post">
+        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}"/>
+        <label for="firstname">:نام</label><br>
+        <input type="text" id="firstname" name="firstname" placeholder="نام" {% if current_user.firstname %}value="{{ current_user.firstname }}"{% endif %}><br>
+        <label for="lastname">:نام خانوادگی</label><br>
+        <input type="text" id="lastname" name="lastname" placeholder="نام خانوادگی" {% if current_user.lastname %}value="{{ current_user.lastname }}"{% endif %}><br>
+        <label for="phone">:شماره تلفن</label><br>
+        <input type="text" id="phone" name="phone" placeholder="شماره تلفن" {% if current_user.phone %}value="{{ current_user.phone }}"{% endif %} disabled><br>
+        <label for="gender">:جنسیت</label>
+        <select id="gender" name="gender">
+            <option value="male" {% if current_user.gender == 'male' %}selected{% endif %}>مرد</option>
+            <option value="female" {% if current_user.gender == 'female' %}selected{% endif %}>زن</option>
+            <option value="other" {% if current_user.gender == 'other' %}selected{% endif %}>سایر</option>
+        </select><br>
+        <label for="birthdate">:تاریخ تولد</label>
+        <input type="date" id="birthdate" name="birthdate" {% if current_user.birthdate %}value="{{ current_user.birthdate }}"{% endif %}><br>
+        <label for="education">:تحصیلات</label><br>
+        <select id="education" name="education">
+            <option value="lower than diploma" {% if current_user.education == 'lower than diploma' %}selected{% endif %}>پایین تر از دیپلم</option>
+            <option value="diploma" {% if current_user.education == 'diploma' %}selected{% endif %}>دیپلم</option>
+            <option value="associate degree" {% if current_user.education == 'associate degree' %}selected{% endif %}>کاردانی</option>
+            <option value="bachelor" {% if current_user.education == 'bachelor' %}selected{% endif %}>کارشناسی</option>
+            <option value="master degree" {% if current_user.education == 'master degree' %}selected{% endif %}>کارشناسی ارشد</option>
+            <option value="phd" {% if current_user.education == 'phd' %}selected{% endif %}>دکترا</option>
+        </select><br>
+        <label for="job">:شغل</label><br>
+        <input type="text" id="job" name="job" placeholder="شغل" {% if current_user.job %}value="{{ current_user.job }}"{% endif %}><br><br>
+        <input type="submit" value="بروزرسانی">
+    </form>
+</body>
+</html>

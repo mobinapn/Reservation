@@ -12,17 +12,15 @@
     {% endif %}
     {% endwith %}
     <form action="/accounts/signup" method="post">
-        <label for="firstname">First name:</label><br>
-        <input type="text" id="firstname" name="firstname" placeholder="Enter Your Firstname"><br>
-        <label for="lastname">Last name:</label><br>
-        <input type="text" id="lastname" name="lastname" placeholder="Enter Your Lastname"><br>
-        <label for="phone">Phone Number:</label><br>
-        <input type="text" id="phone" name="phone" placeholder="Enter Your Phone Number"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" placeholder="Enter Your Password"><br>
-        <label for="confirm">Confirm Password:</label><br>
-        <input type="password" id="confirm" name="confirm" placeholder="Confirm Your Password"><br>
-        <input type="submit" value="Submit">
+        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}"/>
+        <label for="phone">:شماره تلفن</label><br>
+        <input type="text" id="phone" name="phone" placeholder="شماره تلفن خود را وارد کنید" required><br>
+        <label for="password">:رمز عبور</label><br>
+        <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required><br>
+        <label for="confirm">:تایید رمز عبور</label><br>
+        <input type="password" id="confirm" name="confirm" placeholder="رمز عبور خود را تایید کنید" required><br><br>
+        <input type="submit" value="ثبت نام">
     </form>
+    <a href="/accounts/login">ورود</a>
 </body>
 </html>
