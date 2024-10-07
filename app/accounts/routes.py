@@ -3,7 +3,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 
 from app.accounts import bp
 from app.extensions import db
-from app.models.accounts import User
+from app.models.accounts import User, Customer
 
 
 @bp.route('/login')
@@ -12,7 +12,16 @@ def login():
 
 @bp.route('/login', methods=['POST'])
 def login_post():
-    pass
+    phone = request.form.get('phone')
+    password = request.form.get('password')
+
+    user = User.query.filter_by(phone=phone).first()
+    if not user or not user.check_password(password):
+        flash('شماره تلفن یا رمز عبور اشتباه است')
+        return redirect(url_for('accounts.routes.login'))
+    else:
+        login_user(user, remember=True)
+        return redirect(url_for('main.routes.index'))
 
 @bp.route('/signup')
 def signup():
@@ -20,9 +29,27 @@ def signup():
 
 @bp.route('/signup', methods=['POST'])
 def signup_post():
-    pass
+    firstname = request.form.get('firstname')
+    lastname = request.form.get('lastname')
+    phone = request.form.get('phone')
+    password = request.form.get('password')
+    confirm = request.form.get('confirm')
+
+    user = User.query.filter_by(phone=phone).first()
+    if user:
+        flash('کاربری با این شماره تلفن قبلا ثبت نام کرده است')
+        return redirect(url_for('accounts.routes.signup'))
+    else:
+        new_customer = Customer(firstname=firstname, lastname=lastname, phone=phone)
+        new_customer.set_password(password)
+        db.session.add(new_customer)
+        db.session.commit()
+        login_user(new_customer, remember=True)
+        return redirect(url_for('main.routes.index'))
+
 
 @bp.route('/logout')
 @login_required
 def logout():
-    pass
+    logout_user()
+    return redirect(url_for('main.routes.index'))
