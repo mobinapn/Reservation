@@ -8,10 +8,14 @@ from app.main import bp as main_bp
 from app.accounts import bp as accounts_bp
 from app.models.accounts import User
 
+UPLOAD_FOLDER = 'app/static/uploads/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     csrf = CSRFProtect(app)
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     db.init_app(app)
 

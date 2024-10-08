@@ -2,11 +2,17 @@ from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
 from iran_mobile_va import mobile
+from werkzeug.utils import secure_filename
+from app.__init__ import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
+import os
 
 from app.accounts import bp
 from app.extensions import db
 from app.models.accounts import User, Customer
 
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @bp.route('/login')
 def login():
@@ -92,7 +98,21 @@ def profile_post():
     user.lastname = lastname
     user.gender = gender
     user.birthdate = datetime.strptime(birthdate, '%Y-%m-%d') if birthdate else None
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        path = os.path.join(UPLOAD_FOLDER, f'img/profiles/{filename}')
+        file.save(path)
+        user.image = filename
     user.education = education
     user.job = job
     db.session.commit()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('accounts.profile'))
+
+@bp.route('/remove_profile_photo')
+@login_required
+def remove_profile_photo():
+    user = current_user
+    user.image = ''
+    db.session.commit()
+    return redirect(url_for('accounts.profile'))

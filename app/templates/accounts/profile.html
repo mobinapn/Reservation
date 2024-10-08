@@ -6,7 +6,7 @@
     <title>{{ current_user.firstname }} {{ current_user.lastname }} Profile</title>
 </head>
 <body>
-    <form action="/accounts/profile" method="post">
+    <form action="/accounts/profile" method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}"/>
         <label for="firstname">:نام</label><br>
         <input type="text" id="firstname" name="firstname" placeholder="نام" {% if current_user.firstname %}value="{{ current_user.firstname }}"{% endif %}><br>
@@ -14,16 +14,31 @@
         <input type="text" id="lastname" name="lastname" placeholder="نام خانوادگی" {% if current_user.lastname %}value="{{ current_user.lastname }}"{% endif %}><br>
         <label for="phone">:شماره تلفن</label><br>
         <input type="text" id="phone" name="phone" placeholder="شماره تلفن" {% if current_user.phone %}value="{{ current_user.phone }}"{% endif %} disabled><br>
-        <label for="gender">:جنسیت</label>
+        <label for="gender">:جنسیت</label><br>
         <select id="gender" name="gender">
+            {% if not current_user.gender %}
+            <option value="" selected>جنسیت شما</option>
+            {% endif %}
             <option value="male" {% if current_user.gender == 'male' %}selected{% endif %}>مرد</option>
             <option value="female" {% if current_user.gender == 'female' %}selected{% endif %}>زن</option>
             <option value="other" {% if current_user.gender == 'other' %}selected{% endif %}>سایر</option>
         </select><br>
-        <label for="birthdate">:تاریخ تولد</label>
+        <label for="birthdate">:تاریخ تولد</label><br>
         <input type="date" id="birthdate" name="birthdate" {% if current_user.birthdate %}value="{{ current_user.birthdate }}"{% endif %}><br>
+        <div>
+            {% if current_user.image %}
+            <img src="../../static/uploads/img/profiles/{{ current_user.image }}" alt="{{ current_user.firstname }} Profile Image"><br>
+            <a href="/accounts/remove_profile_photo">پاک کردن تصویر فعلی</a><br>
+            {% else %}
+            <img src="../../static/accounts/img/user.png" alt="User Profile Image"><br>
+            {% endif %}
+            <input type="file" name="file">
+        </div><br>
         <label for="education">:تحصیلات</label><br>
         <select id="education" name="education">
+            {% if not current_user.education %}
+            <option value="" selected>تحصیلات شما</option>
+            {% endif %}
             <option value="lower than diploma" {% if current_user.education == 'lower than diploma' %}selected{% endif %}>پایین تر از دیپلم</option>
             <option value="diploma" {% if current_user.education == 'diploma' %}selected{% endif %}>دیپلم</option>
             <option value="associate degree" {% if current_user.education == 'associate degree' %}selected{% endif %}>کاردانی</option>
