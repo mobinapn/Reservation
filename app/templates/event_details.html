@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ event.place }}</title>
+</head>
+<body>
+    <h1>{{ event.place }}</h1>
+    <p>{{ event.details }}</p>
+    <p>{{ event.begin_date }} to {{ event.end_date }}</p>
+    <p>Price: {{ event.price }}</p>
+
+    <h2>Comments</h2>
+    <div id="comments">
+        {% for comment in comments %}
+            <div>
+                <strong>{{ comment.user.username }}</strong>:
+                <p>{{ comment.content }}</p>
+                <a href="#" onclick="document.getElementById('parent_id').value = {{ comment.id }}">Reply</a>
+
+                {% for reply in comment.replies %}
+                    <div style="margin-left: 20px;">
+                        <strong>{{ reply.user.username }}</strong>:
+                        <p>{{ reply.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3>Add a Comment</h3>
+    <form method="POST" action="">
+        {{ comment_form.csrf_token }}
+        {{ comment_form.content.label }} {{ comment_form.content() }}
+        {{ comment_form.parent_id() }}
+        {{ comment_form.submit() }}
+    </form>
+
+    <script>
+        // Dynamically set parent comment ID for replies
+        function setReplyParent(commentId) {
+            document.getElementById('parent_id').value = commentId;
+        }
+    </script>
+</body>
+</html>

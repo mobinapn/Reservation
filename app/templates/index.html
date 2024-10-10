@@ -7,62 +7,27 @@
 <body>
     <h1>Events</h1>
 
-    <!-- Filter form -->
-    <form method="GET" action=".">
-        <div>
-            <label>Start Date:</label>
-            <input type="date" name="start_date" value="{{ request.GET.start_date }}">
-        </div>
-        <div>
-            <label>End Date:</label>
-            <input type="date" name="end_date" value="{{ request.GET.end_date }}">
-        </div>
-        <div>
-            <label>Place:</label>
-            <input type="text" name="place" placeholder="Search by place" value="{{ request.GET.place }}">
-        </div>
-        <div>
-            <label>Min Capacity:</label>
-            <input type="number" name="min_capacity" placeholder="Min capacity" value="{{ request.GET.min_capacity }}">
-        </div>
-        <div>
-            <label>Max Capacity:</label>
-            <input type="number" name="max_capacity" placeholder="Max capacity" value="{{ request.GET.max_capacity }}">
-        </div>
-        <div>
-            <label>Min Rate:</label>
-            <input type="number" name="min_rate" step="0.1" min="0" max="5" placeholder="Min rate" value="{{ request.GET.min_rate }}">
-        </div>
-        <div>
-            <label>Max Rate:</label>
-            <input type="number" name="max_rate" step="0.1" min="0" max="5" placeholder="Max rate" value="{{ request.GET.max_rate }}">
-        </div>
-        <div>
-            <label>Min Price:</label>
-            <input type="number" name="min_price" step="0.01" placeholder="Min price" value="{{ request.GET.min_price }}">
-        </div>
-        <div>
-            <label>Max Price:</label>
-            <input type="number" name="max_price" step="0.01" placeholder="Max price" value="{{ request.GET.max_price }}">
-        </div>
-
-        <button type="submit">Apply Filters</button>
+    <form method="GET" action="/">
+        {{ form.csrf_token }}
+        {{ form.place.label }} {{ form.place(size=20) }}
+        {{ form.start_date.label }} {{ form.start_date() }}
+        {{ form.end_date.label }} {{ form.end_date() }}
+        {{ form.min_price.label }} {{ form.min_price() }}
+        {{ form.max_price.label }} {{ form.max_price() }}
+        {{ form.min_rate.label }} {{ form.min_rate() }}
+        {{ form.max_rate.label }} {{ form.max_rate() }}
+        {{ form.min_capacity.label }} {{ form.min_capacity() }}
+        {{ form.max_capacity.label }} {{ form.max_capacity() }}
+        {{ form.submit() }}
     </form>
 
-    <!-- List of events -->
     <div>
         {% for event in events %}
             <div>
                 <h2>{{ event.place }}</h2>
-                <p>Details: {{ event.details }}</p>
-                <p>Date: {{ event.begin_date }} to {{ event.end_date }}</p>
-                <p>Capacity: {{ event.capacity }}</p>
-                <p>Rate: {{ event.rate }}</p>
-                <p>Price: ${{ event.price }}</p>
-                <hr>
+                <p>{{ event.details }}</p>
+                <a href="{{ url_for('event_detail', event_id=event.id) }}">View Details</a>
             </div>
-        {% empty %}
-            <p>No events found.</p>
         {% endfor %}
     </div>
 </body>
