@@ -31,7 +31,7 @@ def login_post():
         flash('شماره تلفن وارد شده صحیح نمی‌باشد')
         return redirect(url_for('accounts.login'))
 
-    user = User.query.filter_by(phone=phone).first()
+    user = User.query.filter_by(phone=phone[-10:]).first()
     if not user or not user.check_password(password):
         flash('شماره تلفن یا رمز عبور اشتباه است')
         return redirect(url_for('accounts.login'))
@@ -65,7 +65,7 @@ def signup_post():
         flash('کاربری با این شماره تلفن قبلا ثبت نام کرده است')
         return redirect(url_for('accounts.signup'))
     else:
-        new_customer = Customer(phone=phone)
+        new_customer = Customer(phone=phone[-10:])
         new_customer.set_password(password)
         db.session.add(new_customer)
         db.session.commit()
