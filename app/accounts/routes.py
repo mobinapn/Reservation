@@ -1,9 +1,8 @@
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash, current_app
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
 from iran_mobile_va import mobile
 from werkzeug.utils import secure_filename
-from app.__init__ import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 import os
 
 from app.accounts import bp
@@ -12,7 +11,7 @@ from app.models.accounts import User, Customer
 
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
 
 @bp.route('/login')
 def login():
@@ -101,7 +100,7 @@ def profile_post():
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        path = os.path.join(UPLOAD_FOLDER, f'img/profiles/{filename}')
+        path = os.path.join(current_app.config['UPLOAD_FOLDER'], f'img/profiles/{filename}')
         file.save(path)
         user.image = filename
     user.education = education
