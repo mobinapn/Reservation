@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Event</title>
+</head>
+<body>
+    <h1>Order Event: {{ event.place }}</h1>
+    <p>Details: {{ event.details }}</p>
+    <p>Date: {{ event.begin_date }} - {{ event.end_date }}</p>
+    <p>Price: {{ event.price }}</p>
+    <p>Available capacity: {{ event.capacity }}</p>
+
+    <form method="POST">
+        <button type="submit">Confirm Order</button>
+    </form>
+
+    <a href="{{ url_for('event_detail', event_id=event.id) }}">Back to Event</a>
+</body>
+</html>

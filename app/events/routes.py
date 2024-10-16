@@ -4,33 +4,8 @@ from models import Event, Comment, User
 from forms import EventFilterForm, CommentForm
 from flask_login import current_user, login_required
 
-@app.route('/')
-def index():
-    form = EventFilterForm(request.args)
-    events = Event.query
-    
-    # Apply filters
-    if form.place.data:
-        events = events.filter(Event.place.contains(form.place.data))
-    if form.start_date.data and form.end_date.data:
-        events = events.filter(Event.begin_date >= form.start_date.data, Event.end_date <= form.end_date.data)
-    if form.min_price.data:
-        events = events.filter(Event.price >= form.min_price.data)
-    if form.max_price.data:
-        events = events.filter(Event.price <= form.max_price.data)
-    if form.min_rate.data:
-        events = events.filter(Event.rate >= form.min_rate.data)
-    if form.max_rate.data:
-        events = events.filter(Event.rate <= form.max_rate.data)
-    if form.min_capacity.data:
-        events = events.filter(Event.capacity >= form.min_capacity.data)
-    if form.max_capacity.data:
-        events = events.filter(Event.capacity <= form.max_capacity.data)
-    
-    events = events.all()
-    return render_template('events/index.html', events=events, form=form)
 
-@app.route('/event/<int:event_id>', methods=['GET', 'POST'])
+@bp.route('/event/<int:event_id>', methods=['GET', 'POST'])
 def event_detail(event_id):
     event = Event.query.get_or_404(event_id)
     comments = Comment.query.filter_by(event_id=event_id, parent_id=None).all()  # Top-level comments
@@ -54,7 +29,7 @@ def event_detail(event_id):
     return render_template('events/event_details.html', event=event, comments=comments, comment_form=comment_form)
 
 # Update comment route
-@app.route('/update_comment/<int:comment_id>', methods=['GET', 'POST'])
+@bp.route('/update_comment/<int:comment_id>', methods=['GET', 'POST'])
 @login_required  # Ensure user is logged in
 def update_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -77,7 +52,7 @@ def update_comment(comment_id):
     return render_template('events/update_comment.html', form=form, comment=comment)
 
 # Delete comment route
-@app.route('/delete_comment/<int:comment_id>', methods=['POST'])
+@bp.route('/delete_comment/<int:comment_id>', methods=['POST'])
 @login_required  # Ensure user is logged in
 def delete_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -91,3 +66,33 @@ def delete_comment(comment_id):
     db.session.commit()
     flash("Comment deleted successfully!", "success")
     return redirect(url_for('event_detail', event_id=event_id))
+    
+@bp.route('/order_event/<int:event_id>', methods=['GET', 'POST'])
+@login_required
+def order_event(event_id):
+    event = Event.query.get_or_404(event_id)
+
+    # Check if the event still has capacity
+    if event.capacity <= 0:
+        flash(f"Sorry, this event is fully booked.", "danger")
+        return redirect(url_for('event_detail', event_id=event.id))
+
+    # Create a new order for the logged-in user
+    order = Order(
+        user_id=current_user.id,
+        username=current_user.username,  # Storing the username
+        event_id=event.id,
+        event_name=event.place  # Storing the event name
+    )
+    
+    # Calculate the total price of the order
+    order.calculate_total_price()
+
+    # Decrease the event capacity
+    event.capacity -= 1
+
+    db.session.add(order)
+    db.session.commit()
+
+    flash(f'You have successfully ordered the event: {event.place}', 'success')
+    return redirect(url_for('event_detail', event_id=event.id))
