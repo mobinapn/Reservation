@@ -1,5 +1,7 @@
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 from app.main import bp
+from app.models import Event
+from app import app, db
 
 
 
@@ -25,6 +27,7 @@ def index():
         events = events.filter(Event.capacity >= form.min_capacity.data)
     if form.max_capacity.data:
         events = events.filter(Event.capacity <= form.max_capacity.data)
+        
     
     events = events.all()
     return render_template('home.html', events=events, form=form)
@@ -38,5 +41,7 @@ def search():
     else:
         events = Event.query.all()  # If no search term, return all events
 
+
     return render_template('home.html', events=events)
+
 

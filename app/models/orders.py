@@ -1,7 +1,7 @@
 from app import db
 from datetime import datetime
-from accounts.models import User  # Assuming User is in accounts.py
-from events.models import Event  # Assuming Event is in events.py
+from accounts import User 
+from events import Event  
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
