@@ -4,12 +4,18 @@ from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+
+
+
 from config import Config
 from app.extensions import db
 from app.main import bp as main_bp
 from app.accounts import bp as accounts_bp
 from app.models.accounts import User
+
 from flask import Flask
+
+
 
 
 

@@ -27,4 +27,5 @@ def index():
         events = events.filter(Event.capacity <= form.max_capacity.data)
     
     events = events.all()
-    return render_template('events/index.html', events=events, form=form)
+    return render_template('home.html', events=events, form=form)
+
