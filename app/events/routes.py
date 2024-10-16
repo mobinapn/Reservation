@@ -1,11 +1,16 @@
-from flask import render_template, request, redirect, url_for, flash
-from app import app, db
-from models import Event, Comment, User
-from forms import EventFilterForm, CommentForm
+from flask import render_template, request, redirect, url_for, flash, abort
 from flask_login import current_user, login_required
 
+from app.extensions import db
+from app.events import bp
+from app.models.accounts import User
+from app.models.events import Event
+from app.models.comments import Comment
+from app.models.orders import Order
+from app.forms import EventFilterForm, CommentForm
 
-@bp.route('/event/<int:event_id>', methods=['GET', 'POST'])
+
+@bp.route('/<int:event_id>', methods=['GET', 'POST'])
 def event_detail(event_id):
     event = Event.query.get_or_404(event_id)
     comments = Comment.query.filter_by(event_id=event_id, parent_id=None).all()  # Top-level comments
@@ -66,7 +71,7 @@ def delete_comment(comment_id):
     db.session.commit()
     flash("Comment deleted successfully!", "success")
     return redirect(url_for('event_detail', event_id=event_id))
-    
+
 @bp.route('/order_event/<int:event_id>', methods=['GET', 'POST'])
 @login_required
 def order_event(event_id):

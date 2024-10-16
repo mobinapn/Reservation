@@ -1,15 +1,16 @@
 from flask import render_template, request, redirect, url_for
-from app.main import bp
-from app.models import Event
-from app import app, db
 
+
+from app.main import bp
+from app.models.events import Event
+from app.forms import EventFilterForm
 
 
 @bp.route('/')
 def index():
     form = EventFilterForm(request.args)
     events = Event.query
-    
+
     # Apply filters
     if form.place.data:
         events = events.filter(Event.place.contains(form.place.data))
@@ -27,11 +28,11 @@ def index():
         events = events.filter(Event.capacity >= form.min_capacity.data)
     if form.max_capacity.data:
         events = events.filter(Event.capacity <= form.max_capacity.data)
-        
-    
+
+
     events = events.all()
     return render_template('home.html', events=events, form=form)
-    
+
 @bp.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.args.get('q')  # Get the search term from the query string
@@ -43,5 +44,3 @@ def search():
 
 
     return render_template('home.html', events=events)
-
-

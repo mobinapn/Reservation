@@ -16,6 +16,9 @@ class User(UserMixin, db.Model):
     job = db.Column(db.String(50), nullable=True)
     role = db.Column(db.String(20))
 
+    comments = db.relationship('Comment', backref='user', lazy=True)
+    orders = db.relationship('Order', backref='user', lazy=True)
+
     __mapper_args__ = {
         'polymorphic_identity': 'user',
         'polymorphic_on': role
@@ -28,7 +31,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return f'<User "{self.firstname} {self.lastname}">'
+        return f'<User "{self.phone}">'
 
 
 class Admin(User):
