@@ -1,5 +1,7 @@
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 from app.main import bp
+from app.models import Event
+from app import app, db
 
 
 
@@ -25,7 +27,19 @@ def index():
         events = events.filter(Event.capacity >= form.min_capacity.data)
     if form.max_capacity.data:
         events = events.filter(Event.capacity <= form.max_capacity.data)
+        
     
     events = events.all()
     return render_template('home.html', events=events, form=form)
+    
+@bp.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.args.get('q')  # Get the search term from the query string
+    if query:
+        # Perform a search on the Event model, assuming you have an "Event" model
+        events = Event.query.filter(Event.name.ilike(f'%{query}%')).all()
+    else:
+        events = Event.query.all()  # If no search term, return all events
+
+    return render_template('index.html', events=events)
 
