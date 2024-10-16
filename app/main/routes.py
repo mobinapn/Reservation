@@ -28,4 +28,15 @@ def index():
     
     events = events.all()
     return render_template('home.html', events=events, form=form)
+    
+@bp.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.args.get('q')  # Get the search term from the query string
+    if query:
+        # Perform a search on the Event model, assuming you have an "Event" model
+        events = Event.query.filter(Event.name.ilike(f'%{query}%')).all()
+    else:
+        events = Event.query.all()  # If no search term, return all events
+
+    return render_template('home.html', events=events)
 
