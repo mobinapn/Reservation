@@ -16,141 +16,7 @@
 div.wrapper{
     width: 100%;
 }
-div.wrapper>div.head{
-    width: 100%;
-    height: 50px;
-    background-color: #ffc107;
-    line-height: 50px;
-    
-}
-div.wrapper>div.head>p{
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
-    
-}
-div.wrapper>div.search{
-    width: 100%;
-    height: 66px;
-    background-color: #ffffff;
-    direction: rtl;
-}
-div.wrapper>div.search>div.logo{
-    width: 150px;
-    height: inherit;
-    padding-right: 15px;
-    display: inline-block;
-    vertical-align: top;    
-}
-div.wrapper>div.search>div.logo>img{
-    cursor: pointer;
-    width: 115px;
-    height: 100%;
-    object-fit: contain;
-}
-div.wrapper>div.search>div.search-box{
-    width: 1160px;
-    height: inherit;
-    display: inline-block;
-    vertical-align: top;
-    padding: 12px 0 0 0;
-}
-div.wrapper>div.search>div.search-box>input{
-    width: 600px;
-    height: 43px;
-    border-radius: 10px;
-    padding-right: 55px;
-    color: #a09d9d;
-    border: 1px solid #4b964d;
-}
-div.wrapper>div.search>div.log-in{
-    width: 195px;
-    height: inherit;
-    display: inline-block;
-    vertical-align: top;
-}
-div.wrapper>div.search>div.log-in>div.log{
-    width: 132px;
-    height: 40px;
-    border: 1px solid #4b964d;
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 10px;
-    margin-top: 14px;
-    cursor: pointer;
-    color: #4b964d;
-}
-div.wrapper>div.search>div.log-in>div.icon{
-    width: 57px;
-    height: 36px;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 15px;
-    border-right: 1px solid #4b964d;
 
-}
-div.wrapper>div.search>div.log-in>div.icon>i{
-    margin-top: 10px;
-    margin-right: 22px;
-    font-size: 22px;
-    cursor: pointer;
-    color: #4b964d;
-}
-div.wrapper>div.search>div.log-in>div.log>i{
-    margin-right: 10px;
-    padding-top: 10px;
-    font-size: 16px;
-    color: #4b964d;
-}
-div.wrapper>div.search>div.log-in>div.log>div.text{
-    border-left: 1.5px solid #4b964d;
-    display: inline-block;
-}
-div.wrapper>div.search>div.log-in>div.log>div.text>p{
-font-size: 12px;
-padding-left: 5px;
-}
-div.wrapper>div.search>div.log-in>div.log>p{
-font-size: 12px;
-display: inline-block;
-vertical-align: top;
-padding-top: 13px;
-
-}
-div.wrapper>div.menu{
-    width: 1440px;
-    margin-left: 39.5px;
-    direction: rtl;
-    background-color: #ffffff;
-    border-top: 1px solid #4b964d;
-    border-bottom: 1px solid #4b964d;
-}
-div.wrapper>div.menu>div.master-menu{
-    width: 70%;
-    height: 60px;
-    display: inline-block;
-    vertical-align: top;
-    line-height: 60px;
-}
-div.wrapper>div.menu>div.master-menu>nav{
-    width: 100%;
-}
-div.wrapper>div.menu>div.master-menu>nav>ul{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-div.wrapper>div.menu>div.master-menu>nav>ul>li>a{
-    color: #4b964d;
-    font-size: 13px;
-    padding: 5px;
-}
-div.wrapper>div.menu>div.master-menu>nav>ul>li>a:hover{
-    border: 1px solid #4b964d;
-    border-radius: 20px;
-    background-color: #4b964d;
-    color: white;
-}
 div.wrapper>div.slider{
     width: 1440px;
     height: 639.88px;
@@ -287,7 +153,6 @@ div.wrapper>div.slider>div.swiper>div.swiper-button-next::after{
   font-size: 14px;
 }
 div.wrapper>div.category{
-    background-color: #ffc107;
     width: 1440px;
     margin-left: 39.5px;
     direction: rtl;
@@ -300,8 +165,8 @@ div.wrapper>div.category>div.part{
     justify-content: space-evenly;
 }
 div.wrapper>div.category>div.part>div.cart{
-    background-color: crimson;
-    border: 1px solid black;
+    background-color: #fdf2d0;
+    border: 1px solid #ffebb1;
     padding: 10px;
     width: 240px;
     height: 335px;
@@ -317,4 +182,25 @@ div.wrapper>div.category>div.part>div.cart>img{
 div.wrapper>div.category>div.part>div.cart>h2{
     text-align: center;
 }
-
+.buy{
+  border-radius: 20px;
+    width: 101px;
+    height: 40px;
+    color: white;
+    margin-top: 40px;
+    margin-right:55px ;
+    background-color: #4b964d;
+    cursor: pointer;
+    transition: 500ms;
+    border: none;
+    display: none;
+}
+div.wrapper>div.category>div.part>div.cart:hover>button.buy{
+  display: inline-block; 
+}
+div.wrapper>div.category>div.part>div.cart:hover>p{
+  display: none; 
+}
+div.wrapper>div.category>div.part>div.cart:hover>h2{
+  display: none; 
+}

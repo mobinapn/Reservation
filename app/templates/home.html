@@ -1,55 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه اینترنتی تورکت</title>
-    <link rel="shortcut icon" href="../static/img/logo/logo2.png">
-    <link rel="stylesheet" href="../static/css/home.css">
-    <link rel="stylesheet" href="../static/icon/fontawesome-free-5.15.4-web/css/all.min.css">
-    <link rel="stylesheet" href="../static/swiper/swiper-bundle.min.css">
-</head>
-<body>
-    <div class="wrapper">
-        <div class="head">
-            <p>به تورکت خوش آمدید</p>
-        </div>
-        <div class="search">
-            <div class="logo">
-                <img src="../static/img/logo/logo2.png" alt="تورکت"/>
-            </div>
-            <div class="search-box">
-                <input type="search" placeholder="جستجو" >
-            </div>
-            <div class="log-in">
-                <div class="log">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <div class="text">
-                        <p>ورود</p>
-                    </div>
-                    <p>ثبت نام</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            <div class="master-menu">
-              <nav>
-                <ul>
-                  <li><a href="#">خانه</a></li>  
-                  <li><a href="#">تور داخلی</a></li>
-                  <li><a href="#">تور خارجی</a></li>
-                  <li><a href="#">تور یک روزه</a></li>
-                  <li><a href="#">بلاگ ها</a></li>
-                  <li><a href="#">سوالات پرتکرار</a></li>
-                  <li><a href="#">تماس با ما</a></li>
-                  <li><a href="#">درباره ما</a></li>
-                </ul>
-              </nav>
-            </div>
-        </div>
+{% extends 'base.html' %}
+
+{% block title %}
+فروشگاه اینترنتی تورکت
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="../static/css/home.css">
+{% endblock %}
+
+{% block head %}
+به تورکت خوش آمدید
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+
         <div class="slider">
             <div class="swiper nill-edl">
                 <div class="swiper-wrapper">
@@ -112,40 +77,40 @@
         <div class="category">
             <h1>تورهای داخلی</h1>
             <div class="part">
-                <div class="cart">
-                    <img src="" alt="">
+                <div class="cart cart1">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
-                    <p class="price">13145</p>
+                    <p class="price">7575</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 
 
@@ -154,39 +119,39 @@
             <div class="part">
                 
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
 
             </div>
@@ -194,45 +159,47 @@
             <div class="part">
                 
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
                 <div class="cart">
-                    <img src="" alt="">
+                    <img src="../static/img/slider/Masal-village-1024x573.webp" alt="">
                     <h2>سایب</h2>
                     <p class="price">13145</p>
                     <p>الیبلافبیسلبقیلبقیبقثلابتننننننننی</p>
-                    <button>buyyyyyy</button>
+                    <button class="buy">رزرو</button>
                 </div>
 
             </div>
         </div>      
         
     </div>
+    <script src="../static/jquery/dist/jquery.min.js"></script>
+    <script src="../static/js/main.js"></script> 
     <script src="../static/swiper/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".nill-edl", {
@@ -251,5 +218,5 @@
             prevEl: ".swiper-button-prev",
           },
         });
-      </script>   
-</body>    
+      </script>
+{% endblock %}

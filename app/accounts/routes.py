@@ -15,7 +15,7 @@ def allowed_file(filename):
 
 @bp.route('/login')
 def login():
-    # return render_template('accounts/login.html')
+    return render_template('accounts/login.html')
 
 @bp.route('/login', methods=['POST'])
 def login_post():
@@ -40,7 +40,7 @@ def login_post():
 
 @bp.route('/signup')
 def signup():
-    # return render_template('accounts/signup.html')
+    return render_template('accounts/signup.html')
 
 @bp.route('/signup', methods=['POST'])
 def signup_post():
@@ -81,7 +81,7 @@ def logout():
 @bp.route('/profile')
 @login_required
 def profile():
-    # return render_template('accounts/profile.html')
+    return render_template('accounts/profile.html')
 
 @bp.route('/profile', methods=['POST'])
 @login_required

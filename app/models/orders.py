@@ -20,6 +20,7 @@ class Order(db.Model):
     # Order details
     order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date when the order was placed
     total_price = db.Column(db.Float, nullable=False)  # Total price of the order
+    oassenger_num = db.Column(db.Integer, nullable=False)  # number of passengers
     
     # Relationships
     user = db.relationship('User', backref='user_orders')  # User-Order relationship
