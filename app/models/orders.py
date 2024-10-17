@@ -1,4 +1,5 @@
-from datetime import datetime
+from flask import flash
+from datetime import datetime, timezone
 
 from app.extensions import db
 from app.models.accounts import User
@@ -10,7 +11,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     # User who made the order
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Foreign key from accounts.User
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Foreign key from accounts.User
     username = db.Column(db.String(80), nullable=False)  # Store the username
     
     # Event that was ordered
@@ -18,7 +19,7 @@ class Order(db.Model):
     event_name = db.Column(db.String(100), nullable=False)  # Store the event name
     
     # Order details
-    order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date when the order was placed
+    order_date = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))  # Date when the order was placed
     total_price = db.Column(db.Float, nullable=False)  # Total price of the order
     oassenger_num = db.Column(db.Integer, nullable=False)  # number of passengers
     

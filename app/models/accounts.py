@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, timezone
 
 from app.extensions import db
 
@@ -18,8 +19,7 @@ class User(UserMixin, db.Model):
     job = db.Column(db.String(50), nullable=True)
     role = db.Column(db.String(20))
 
-    comments = db.relationship('Comment', backref='user', lazy=True)
-    orders = db.relationship('Order', backref='user', lazy=True)
+    wallet = db.relationship('Wallet', backref='user', lazy='select', uselist=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'user',
@@ -56,3 +56,28 @@ class Customer(User):
     __mapper_args__ = {
         'polymorphic_identity': 'customer',
     }
+
+class Wallet(db.Model):
+    __tablename__ = 'wallets'
+    id = db.Column(db.Integer, primary_key=True)
+    balance = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            db.session.commit()
+        else:
+            raise ValueError('invalid amount')
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+            db.session.commit()
+        else:
+            raise ValueError('insufficient balance or invalid amount')
+
+    def __repr__(self):
+        return f'<Wallet for user "{self.user_id} with balance {self.balance}">'
