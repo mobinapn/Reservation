@@ -1,3 +1,4 @@
+from flask import flash
 from datetime import datetime
 
 from app.extensions import db
@@ -35,3 +36,28 @@ class Order(db.Model):
             self.total_price = event.price
         else:
             self.total_price = 0.0
+
+class Wallet(db.Model):
+    __tablename__ = 'wallets'
+    id = db.Column(db.Integer, primary_key=True)
+    balance = db.Column(db.Float, default=0.0)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            db.session.commit()
+        else:
+            raise ValueError('invalid amount')
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+            db.session.commit()
+        else:
+            raise ValueError('insufficient balance or invalid amount')
+
+    def __repr__(self):
+        return f'<Wallet for user "{self.user_id} with balance {self.balance}">'

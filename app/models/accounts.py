@@ -20,6 +20,7 @@ class User(UserMixin, db.Model):
 
     comments = db.relationship('Comment', backref='user', lazy=True)
     orders = db.relationship('Order', backref='user', lazy=True)
+    wallet = db.relationship('Wallet', backref='user', lazy='select', uselist=False)
 
     __mapper_args__ = {
         'polymorphic_identity': 'user',
