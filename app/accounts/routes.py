@@ -7,7 +7,7 @@ import os
 
 from app.accounts import bp
 from app.extensions import db
-from app.models.accounts import User, Customer
+from app.models.accounts import User, Customer, Wallet
 
 
 def allowed_file(filename):
@@ -15,10 +15,14 @@ def allowed_file(filename):
 
 @bp.route('/login')
 def login():
-    # return render_template('accounts/login.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    return render_template('accounts/login.html')
 
 @bp.route('/login', methods=['POST'])
 def login_post():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     phone = request.form.get('phone')
     password = request.form.get('password')
 
@@ -40,10 +44,14 @@ def login_post():
 
 @bp.route('/signup')
 def signup():
-    # return render_template('accounts/signup.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    return render_template('accounts/signup.html')
 
 @bp.route('/signup', methods=['POST'])
 def signup_post():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     phone = request.form.get('phone')
     password = request.form.get('password')
     confirm = request.form.get('confirm')
@@ -68,6 +76,9 @@ def signup_post():
         new_customer.set_password(password)
         db.session.add(new_customer)
         db.session.commit()
+        new_wallet = Wallet(user_id=new_customer.id)
+        db.session.add(new_wallet)
+        db.session.commit()
         login_user(new_customer)
         return redirect(url_for('main.index'))
 
@@ -81,7 +92,7 @@ def logout():
 @bp.route('/profile')
 @login_required
 def profile():
-    # return render_template('accounts/profile.html')
+    return render_template('accounts/profile.html')
 
 @bp.route('/profile', methods=['POST'])
 @login_required
@@ -115,3 +126,20 @@ def remove_profile_photo():
     user.image = ''
     db.session.commit()
     return redirect(url_for('accounts.profile'))
+
+@bp.route('/wallet')
+@login_required
+def wallet_view():
+    wallet = current_user.wallet
+    return render_template('accounts/wallet.html', wallet=wallet)
+
+@bp.route('/wallet', methods=['POST'])
+@login_required
+def wallet_view_post():
+    amount = int(request.form.get('amount'))
+    wallet = current_user.wallet
+    try:
+        wallet.deposit(amount)
+    except ValueError:
+        flash('مقدار مورد نظر صحیح نمیباشد')
+    return redirect(url_for('accounts.wallet_view'))
