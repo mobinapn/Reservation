@@ -1,0 +1,118 @@
+@font-face {
+    font-family: iransans;
+    src: url(../font/Iranian\ Sans.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: iransans;
+    list-style: none;
+    direction: rtl;
+}
+.container { 
+    width: 100%; 
+    margin: auto; 
+    overflow: hidden; 
+} 
+.profile-header { 
+    width: 100%;
+    height: 50px;
+    background-color: #ffc107;
+    line-height: 50px;
+}
+.profile-img{
+    padding-right: 2%;
+    width: 18%;
+}.label{
+    margin-top: 2%;
+    color: #4b964d;
+}
+.profile-img>img{
+    border-radius: 50%;
+    margin: 2%;
+    width: 80%;
+    border: 1px solid #4b964d;
+    margin-bottom: 20px;
+}
+.a-edit{
+    margin-top: 10px;
+    margin-right: 19%;
+    cursor: pointer;
+    color: #4b964d;
+}
+.tour{
+    width: 35%;
+    border-radius: 10px;
+    border: 1px solid #4b964d;
+}
+.textt{
+    display: grid;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+.info{
+    color: black;
+    margin-right: 100px;
+}
+.a-edit:hover{
+    text-decoration: underline;
+}
+.profile-header h1 { 
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+} 
+.profile-content { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 20px 0; 
+    width: 1440px;
+    margin-right: 39.5px;
+} 
+.profile-info{ 
+    background: #ffffff; 
+    padding: 20px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    width: 81%; 
+    
+}
+.profile-reservations{
+    width: 1440px;
+    margin-right: 39.5px;
+    padding-top: 5%;
+} 
+.profile-info h2, .profile-reservations h2 { 
+    border-bottom: 2px solid #4b964d; 
+    padding-bottom: 10px; 
+} 
+.reservation-item { 
+    display: flex;
+    padding: 10px 0; 
+    border-bottom: 1px solid #6cb46e; 
+    padding: 50px 0 ;
+} 
+.reservation-item:last-child { 
+    border-bottom: none;
+} 
+.btn { 
+    background-color: #ffc107; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 20px; 
+} 
+.btn:hover { 
+    background-color: #fbea2d; 
+} 
+.hidden { 
+    display: none; 
+} 
+.profile-info input { 
+    width: calc(100% - 20px); 
+    padding: 5px; 
+    margin: 5px 0; 
+
+}

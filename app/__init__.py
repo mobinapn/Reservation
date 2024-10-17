@@ -1,22 +1,15 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_login import LoginManager
-
 
 
 from config import Config
 from app.extensions import db
 from app.main import bp as main_bp
 from app.accounts import bp as accounts_bp
+from app.events import bp as events_bp
 from app.models.accounts import User
-
-from flask import Flask
-
-
-
 
 
 def create_app(config_class=Config):
@@ -37,5 +30,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
 
     app.register_blueprint(accounts_bp, url_prefix='/accounts')
+
+    app.register_blueprint(events_bp, url_prefix='/events')
 
     return app
