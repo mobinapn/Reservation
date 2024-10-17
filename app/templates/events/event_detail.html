@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ایونت</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-    <link href="../../static/accounts/css/events.css" rel="stylesheet">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+کویر مرنجاب
+{% endblock %}
+
+{% block css %}
+<link href="../../static/accounts/css/events.css" rel="stylesheet">
+{% endblock %}
+
+{% block head %}
+جزئیات ایونت
+{% endblock %}
+
+{% block content %}
     <div class="container-md mt-4">
     <div id="carouselExampleIndicators" class="carousel slide custom-carousel">
         <div class="carousel-indicators">
@@ -17,13 +22,13 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../static/accounts/images/779569a4-4b49-433d-b81e.png" class="d-block w-100" alt="...">
+            <img src="../../static/accounts/img/779569a4-4b49-433d-b81e.png" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="../../static/accounts/images/download.jpg" class="d-block w-100" alt="...">
+            <img src="../../static/accounts/img/download.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="../../static/accounts/images/download (1).jpg" class="d-block w-100" alt="...">
+            <img src="../../static/accounts/img/download (1).jpg" class="d-block w-100" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -222,5 +227,4 @@ document.addEventListener('click', function(event) {
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
       </div>
-</body>
-</html>
+{% endblock %}

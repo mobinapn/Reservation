@@ -133,11 +133,11 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     width: 100%;
     height: 266px;
-    background:url("../../accounts/images/output-onlinepngtools.png") no-repeat scroll center 0 ;
+    background:url("../accounts/img/output-onlinepngtools.png") no-repeat scroll center 0 ;
 }
 
 .new_footer_top .footer_bg .footer_bg_one {
-    background: url("../../accounts/images/volks.gif") no-repeat center center;
+    background: url("../accounts/img/volks.gif") no-repeat center center;
     width: 330px;
     height: 105px;
   background-size:100%;
@@ -149,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .new_footer_top .footer_bg .footer_bg_two {
-    background: url("../../accounts/images/plane-4979_256.gif") no-repeat center center;
+    background: url("../accounts/img/plane-4979_256.gif") no-repeat center center;
     width: 88px;
     height: 100px;
     background-size: 100%;

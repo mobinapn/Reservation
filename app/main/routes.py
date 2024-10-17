@@ -40,10 +40,4 @@ def search():
         events = Event.query.filter(Event.name.ilike(f'%{query}%')).all()
     else:
         events = Event.query.all()  # If no search term, return all events
-<<<<<<< HEAD
-    return render_template('home.html', events=events)
-=======
->>>>>>> 9d3171a3e4d454d97ef0fe40662ef9dd1bfe0ba1
-
-
     return render_template('home.html', events=events)
