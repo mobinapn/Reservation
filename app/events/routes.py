@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash, abort
 from flask_login import current_user, login_required
 
-from app.extensions import db
 from app.events import bp
+from app.extensions import db
 from app.models.accounts import User
 from app.models.events import Event
 from app.models.comments import Comment

@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for
 
-
 from app.main import bp
 from app.models.events import Event
 from app.forms import EventFilterForm

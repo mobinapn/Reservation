@@ -1,8 +1,7 @@
-from accounts import TourOrganizer 
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-db = SQLAlchemy()
+from app.extensions import db
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)

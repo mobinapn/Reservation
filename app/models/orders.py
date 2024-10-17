@@ -1,20 +1,20 @@
-from app import db
 from datetime import datetime
-from accounts import User 
-from events import Event  
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
+
+from app.extensions import db
+from app.models.accounts import User
+from app.models.events import Event
+
 
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
     
     # User who made the order
-    user_id = db.Column(db.Integer, ForeignKey('user.id'), nullable=False)  # Foreign key from accounts.User
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Foreign key from accounts.User
     username = db.Column(db.String(80), nullable=False)  # Store the username
     
     # Event that was ordered
-    event_id = db.Column(db.Integer, ForeignKey('events.id'), nullable=False)  # Foreign key from events.Event
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)  # Foreign key from events.Event
     event_name = db.Column(db.String(100), nullable=False)  # Store the event name
     
     # Order details
@@ -22,8 +22,8 @@ class Order(db.Model):
     total_price = db.Column(db.Float, nullable=False)  # Total price of the order
     
     # Relationships
-    user = relationship('User', backref='user_orders')  # User-Order relationship
-    event = relationship('Event', backref='event_orders')  # Event-Order relationship
+    user = db.relationship('User', backref='user_orders')  # User-Order relationship
+    event = db.relationship('Event', backref='event_orders')  # Event-Order relationship
     
     def __repr__(self):
         return f'<Order {self.id}, User: {self.username}, Event: {self.event_name}, Price: {self.total_price}>'
