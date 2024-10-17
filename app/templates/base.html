@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        {% block css %}{% endblock %}
+        <link rel="stylesheet" href="../static/css/header.css">
+        <link rel="shortcut icon" href="../static/img/logo/logo2.png">
+        <link rel="stylesheet" href="../static/icon/fontawesome-free-5.15.4-web/css/all.min.css">
+        <link rel="stylesheet" href="../static/swiper/swiper-bundle.min.css">
+    </head>
+<body>
+    <div class="head">
+        <p>{% block head %}{% endblock %}</p>
+    </div>
+    <header>
+        <div class="search">
+            <div class="logo">
+                <img src="../static/img/logo/logo2.png" alt="تورکت"/>
+            </div>
+            <div class="search-box">
+                <input type="search" placeholder="جستجو" >
+            </div>
+            {% if current_user.is_authenticated %}
+            <div class="log-in">
+                <div class="log">
+                    <p>حساب کاربری</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+            {% else %}
+            <div class="log-in">
+                <div class="log">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <div class="text">
+                        <p>ورود</p>
+                    </div>
+                    <p>ثبت نام</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="menu">
+            <div class="master-menu">
+              <nav>
+                <ul>
+                  <li><a href="#">خانه</a></li>  
+                  <li><a href="#" id="li1">تور داخلی</a></li>
+                  <li><a href="#" id="li2">تور خارجی</a></li>
+                  <li><a href="#" id="li3">تور یک روزه</a></li>
+                  <li><a href="#">بلاگ ها</a></li>
+                  <li><a href="#">سوالات پرتکرار</a></li>
+                  <li><a href="#">تماس با ما</a></li>
+                  <li><a href="#">درباره ما</a></li>
+                </ul>
+              </nav>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock%}
+</body>
+</html>

@@ -1,0 +1,69 @@
+@font-face {
+    font-family: iransans;
+    src: url(../font/Iranian\ Sans.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: iransans;
+    list-style: none;
+    direction: rtl; 
+}
+.container { 
+    width: 80%;
+    margin: auto; 
+    overflow: hidden;
+} 
+.cart-header {
+    background-color: #ffc107; 
+    color: #fff; padding: 1em 0; 
+    text-align: center; 
+} 
+.cart-items { 
+    list-style: none; 
+    padding: 0; 
+} 
+.cart-item { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 1em; 
+    border-bottom: 1px solid #ddd;  
+} 
+.cart-item h4, .cart-item p { 
+    margin: 0;
+} 
+.total { 
+    text-align: left; 
+    padding: 1em 0; 
+} 
+.btn { 
+    background-color: #ffc107; 
+    color: white; 
+    padding: 0.5em 1em; 
+    border: none; 
+    cursor: pointer; 
+} 
+.btn:hover { 
+    background-color: #ffce3b; 
+} 
+.img-shop{
+    width: 40%;
+    border-radius: 10px;
+    border: 1px solid #4b964d;
+}
+.check{
+    margin-top: 20px;
+}
+.num{
+    width: 40px;
+    height: 30px;
+}
+.info-tour{
+    padding-top: 100px;
+    display: grid;
+    justify-content: space-between;
+}
+.info-tourr{
+    padding-top: 100px;
+}

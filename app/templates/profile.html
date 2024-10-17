@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+حساب کاربری
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="../static/css/profile.css">
+{% endblock %}
+
+{% block head %}
+اطلاعات شما
+{% endblock %}
+
+{% block content %}
+                <div class="profile-content">
+                    <div class="profile-img">
+                        <img src="../static/img/prof.jpg" alt=""> 
+                        <a class="a-edit">ویرایش تصویر</a> 
+                    </div> 
+                    <div class="profile-info"> 
+                        <h2>اطلاعات کاربر</h2> 
+                        <p class="label"><strong>نام:</strong> 
+                            <span id="name">نیلوفر</span> 
+                            <input type="text" id="name-input" class="hidden">
+                        </p> 
+                        <p class="label"><strong>ایمیل:</strong> <span id="email">nill@example.com</span> 
+                            <input type="email" id="email-input" class="hidden">
+                        </p> <p class="label"><strong>شماره تلفن:</strong> 
+                            <span id="phone">+123456789</span> 
+                            <input type="tel" id="phone-input" class="hidden">
+                        </p> 
+                        <button class="btn" onclick="editProfile()">ویرایش حساب کاربری</button> 
+                        <button class="btn hidden" id="save-button" onclick="saveProfile()">ذخیره اطلاعات</button> 
+                    </div>
+                </div>
+                <div class="profile-reservations"> 
+                        <h2>تورهای شما</h2> 
+                        <div class="reservation-item"> 
+                            <img class="tour" src="../static/img/slider/isfahan.webp" alt="">
+                            <div class="textt">
+                                <p class="info"><strong>نام تور:</strong> تور پاریس</p> 
+                                <p class="info"><strong>تاریخ:</strong> 1403-05-02</p>
+                                <p class="info"><strong>مبلغ:</strong> 34000000</p>
+                            </div>
+                        </div> 
+                        <div class="reservation-item">
+                            <img class="tour" src="../static/img/slider/isfahan.webp" alt="">
+                            <div class="textt"> 
+                                <p class="info"><strong>نام تور:</strong> تور ماسال</p> 
+                                <p class="info"><strong>تاریخ:</strong> 1403-08-09</p>
+                                <p class="info"><strong>مبلغ:</strong> 34000000</p> 
+                            </div>    
+                        </div> 
+                        <!-- Add more reservations here --> 
+                </div> 
+                 
+            </div>
+            <script src="../static/js/main.js"></script>  
+{% endblock %}
