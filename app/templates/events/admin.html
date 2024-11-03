@@ -143,12 +143,11 @@
             <h1 style="color: #4b964d;">در اینجا میتوانید نظرات کاربران را مشاهده کنید</h1>
             <h4 style="color: #4b964d;">کلیک کنید تا به صفحه مرتبط بروید</h4>
             <div class="comments">
-            <ul>
-                {% for post in posts %}
+                {%for comment in comments %}
+                <ul>
                    <li>
-                    <a href="/posts/{{post.post_id}}">{{post.title}} ({{post.time_ago}})</a>
+                    <a href=""></a>
                    </li> 
-                {% endfor %}
                 </ul>
             </div>
     </div>
