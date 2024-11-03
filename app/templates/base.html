@@ -40,9 +40,13 @@
                 <div class="log">
                     <i class="fas fa-sign-in-alt"></i>
                     <div class="text">
-                        <p>ورود</p>
+                        <a href="{{url_for('accounts.login')}}">
+                            <p>ورود</p>
+                        </a>
                     </div>
-                    <p>ثبت نام</p>
+                    <a href="{{url_for('accounts.signup')}}">
+                        <p>ثبت نام</p>
+                    </a>
                 </div>
                 <div class="icon">
                     <i class="fas fa-shopping-cart"></i>

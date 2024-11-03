@@ -18,7 +18,7 @@
 			<img src="../../static/accounts/img/undraw_travelers_re_y25a.svg">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form action="{{url_for('accounts.signup')}}" method="post">
 				<img src="../../static/accounts/img/logo2.png">
 				<h2 class="title">خوش آمدید</h2>
            		<div class="input-div one">
@@ -27,7 +27,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>شماره تلفن</h5>
-           		   		<input type="" class="input">
+           		   		<input type="tel" class="input" name="phone">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -36,7 +36,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>رمز عبور  </h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
                 <div class="input-div pass">
@@ -45,11 +45,11 @@
                     </div>
                     <div class="div">
                          <h5> تکرار رمز عبور</h5>
-                         <input type="password" class="input">
+                         <input type="password" class="input" name="confirm">
                  </div>
               </div>
 				<div class="sub">
-                <a href="#" class="a2"> قبلا حساب کاربری ایجاد کرده‌اید؟</a>
+                <a href="{{url_for('accounts.login')}}" class="a2"> قبلا حساب کاربری ایجاد کرده‌اید؟</a>
 				</div>
             	
             	<input type="submit" class="btn" value="ورود">
