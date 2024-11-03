@@ -1,6 +1,6 @@
 @font-face {
 	font-family: face;
-	src: url(./Iranian\ Sans.ttf);
+	src: url(../../font/Iranian\ Sans.ttf);
 }
 *{
 	padding: 0;
@@ -13,7 +13,7 @@
 
 body{
     overflow: hidden;
-    direction: rtl; /* افزودن جهت نمایش راست به چپ */
+    direction: rtl;
 }
 
 .wave{
@@ -166,9 +166,7 @@ a{
 	transition: .3s;
 
 }
-/*.a2{
-float: inline-end;
-}*/
+
 a:hover{
 	color: #ffc107;
 }
@@ -231,4 +229,24 @@ a:hover{
 	.login-content{
 		justify-content: center;
 	}
+}
+
+#error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin: 0;
+    border: 1px solid #f5c6cb;
+    position: relative;
+	text-align: center;
+}
+
+.progress-bar {
+    height: 3px;
+    background-color: #721c24;
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 5s linear;
 }

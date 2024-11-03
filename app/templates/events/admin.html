@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل ادمین - افزودن تور</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            font-family: face;
+            src: url(../../static/font/Iranian\ Sans.ttf);
+        }
+        body {
+            direction: rtl;
+            font-family: face; 
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            color: #4b964d;
+        }
+         .img-container{
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            border-radius: 8px;
+            margin: 10px;
+         }
+        .form-container {
+            padding: 20px;
+            transition: 0.2s;
+        }
+        .form-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4b964d;
+        }
+        .button {
+            background-color: #ffc107;
+            color: #fff;
+        }
+        .button:hover {
+            background-color: #b48b12;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .img-container img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        textarea:focus {
+    transform: translateY(-2px);
+        }
+        .hr{
+            width: 80%;
+            border-top: 5px solid #4b964d;
+        }
+        .comments ul {
+    list-style-type: none;
+    padding: 0;
+        }
+
+        .comments li {
+    margin: 10px 0;
+    list-style-type: none; 
+        }
+        .comments a {
+    text-decoration: none;
+    color: #ffc107;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+        }
+
+    .comments a:hover {
+    background-color: #b48b12;
+    color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="img-container">
+        <img src="../../static/accounts/img/undraw_site_content_re_4ctl.svg" alt="Travel Image">
+    </div>
+    <div class="form-container">
+        <h2 class="form-title">افزودن تور جدید</h2>
+        <form id="tourForm">
+            <div class="mb-3">
+                <label for="tourName" class="form-label">نام تور</label>
+                <input type="text" class="focus-ring focus-ring-success form-control" id="tourName" required>
+            </div>
+            <div class="mb-3">
+                <label for="tourDescription" class="form-label">توضیحات تور</label>
+                <textarea class="focus-ring focus-ring-success  form-control" id="tourDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="tourDestinations" class="form-label">مقاصد</label>
+                <input type="text" class="focus-ring focus-ring-success  form-control" id="tourDestinations" required>
+            </div>
+            <div class="mb-3">
+                <label for="tourDuration" class="form-label">مدت سفر</label>
+                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDuration" required>
+            </div>
+            <div class="mb-3">
+                <label for="tourDate" class="form-label">تاریخ حرکت</label>
+                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="tourAttractions" class="form-label">جاذبه‌ها (با ویرگول جدا کنید)</label>
+                <textarea class="form-control focus-ring focus-ring-success" id="tourAttractions" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="tourEssentials" class="form-label">لوازم ضروری (با ویرگول جدا کنید)</label>
+                <textarea class="form-control focus-ring focus-ring-success" id="tourEssentials" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="tourPrice" class="form-label">قیمت</label>
+                <input type="text" class="form-control focus-ring focus-ring-success" id="tourPrice" required>
+            </div>
+            <button type="submit" class="btn button w-100">ثبت تور</button>
+        </form>
+    </div>
+    <hr class="hr">
+    <div  class="container">
+        <div class="box">
+            <h1 style="color: #4b964d;">در اینجا میتوانید نظرات کاربران را مشاهده کنید</h1>
+            <h4 style="color: #4b964d;">کلیک کنید تا به صفحه مرتبط بروید</h4>
+            <div class="comments">
+            <ul>
+                {% for post in posts %}
+                   <li>
+                    <a href="/posts/{{post.post_id}}">{{post.title}} ({{post.time_ago}})</a>
+                   </li> 
+                {% endfor %}
+                </ul>
+            </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('tourForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const tourData = {
+                name: document.getElementById('tourName').value,
+                description: document.getElementById('tourDescription').value,
+                destinations: document.getElementById('tourDestinations').value,
+                duration: document.getElementById('tourDuration').value,
+                date: document.getElementById('tourDate').value,
+                attractions: document.getElementById('tourAttractions').value.split(','),
+                essentials: document.getElementById('tourEssentials').value.split(','),
+                price: document.getElementById('tourPrice').value
+            };
+            fetch('/api/tours', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tourData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('تور با موفقیت ثبت شد!');
+                document.getElementById('tourForm').reset();
+            })
+            .catch((error) => {
+                alert('خطا در ثبت تور. لطفا دوباره تلاش کنید.');
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
