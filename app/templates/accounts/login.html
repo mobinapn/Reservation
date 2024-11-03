@@ -9,10 +9,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div id="error" class="error">
-		<span>این یک پیام خطا است!</span>
-		<div class="progress-bar" id="progress-bar"></div>
-	</div>
+
+	{% with messages = get_flashed_messages() %}
+  		{% if messages %}
+			<div id="error" class="error">
+				<span>{{ messages.0 }}</span>
+				<div class="progress-bar" id="progress-bar"></div>
+			</div>
+  		{% endif %}
+	{% endwith %}
+
 	<div class="container">
 		
 		<div class="img">
@@ -20,6 +26,7 @@
 		</div>
 		<div class="login-content">
 			<form action="{{url_for('accounts.login')}}" method="post">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 				<img src="../../static/accounts/img/logo2.png">
 				<h2 class="title">خوش آمدید</h2>
            		<div class="input-div one">

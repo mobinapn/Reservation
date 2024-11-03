@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for
+from datetime import datetime
 
 from app.main import bp
+from app.extensions import db
 from app.models.events import Event
 from app.forms import EventFilterForm
 
@@ -41,3 +43,21 @@ def search():
     else:
         events = Event.query.all()  # If no search term, return all events
     return render_template('home.html', events=events)
+
+@bp.route('/admin_panel', methods=['GET'])
+def add_event():
+    return render_template('events/admin.html')
+
+@bp.route('/admin_panel', methods=['POST'])
+def add_event_post():
+    name = request.form.get('name')
+    place = request.form.get('place')
+    details = request.form.get('details')
+    begin_date = datetime.strptime(request.form.get('begin_date'), '%Y-%m-%d')
+    end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d')
+    price = request.form.get('price')
+    capacity = request.form.get('capacity')
+    new_event = Event(name=name, place=place, details=details, begin_date=begin_date, end_date=end_date, price=price, capacity=capacity)
+    db.session.add(new_event)
+    db.session.commit()
+    return redirect(url_for('main.index'))

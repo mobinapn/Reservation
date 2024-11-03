@@ -101,40 +101,49 @@
     </div>
     <div class="form-container">
         <h2 class="form-title">افزودن تور جدید</h2>
-        <form id="tourForm">
+        <form action="{{url_for('main.add_event_post')}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="mb-3">
                 <label for="tourName" class="form-label">نام تور</label>
-                <input type="text" class="focus-ring focus-ring-success form-control" id="tourName" required>
+                <input type="text" class="focus-ring focus-ring-success form-control" id="tourName"  name="name"  required>
             </div>
             <div class="mb-3">
                 <label for="tourDescription" class="form-label">توضیحات تور</label>
-                <textarea class="focus-ring focus-ring-success  form-control" id="tourDescription" rows="3" required></textarea>
+                <textarea class="focus-ring focus-ring-success  form-control" id="tourDescription" rows="3"  name="details"  required></textarea>
             </div>
             <div class="mb-3">
                 <label for="tourDestinations" class="form-label">مقاصد</label>
-                <input type="text" class="focus-ring focus-ring-success  form-control" id="tourDestinations" required>
+                <input type="text" class="focus-ring focus-ring-success  form-control" id="tourDestinations" name="place" required>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="tourDuration" class="form-label">مدت سفر</label>
-                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDuration" required>
-            </div>
+                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDuration" name="" >
+            </div> -->
             <div class="mb-3">
                 <label for="tourDate" class="form-label">تاریخ حرکت</label>
-                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDate" required>
+                <input type="date" class="form-control focus-ring focus-ring-success" id="tourDate" name="begin_date"required>
             </div>
             <div class="mb-3">
+                <label for="tourDate" class="form-label">تاریخ  برگشت</label>
+                <input type="date" class="form-control focus-ring focus-ring-success" id="tourDate" name="end_date" required>
+            </div>
+            <!-- <div class="mb-3">
                 <label for="tourAttractions" class="form-label">جاذبه‌ها (با ویرگول جدا کنید)</label>
-                <textarea class="form-control focus-ring focus-ring-success" id="tourAttractions" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
+                <textarea class="form-control focus-ring focus-ring-success" id="tourAttractions" rows="3" name="" ></textarea>
+            </div> -->
+            <!-- <div class="mb-3">
                 <label for="tourEssentials" class="form-label">لوازم ضروری (با ویرگول جدا کنید)</label>
-                <textarea class="form-control focus-ring focus-ring-success" id="tourEssentials" rows="3" required></textarea>
-            </div>
+                <textarea class="form-control focus-ring focus-ring-success" id="tourEssentials" rows="3" ></textarea>
+            </div> -->
             <div class="mb-3">
                 <label for="tourPrice" class="form-label">قیمت</label>
-                <input type="text" class="form-control focus-ring focus-ring-success" id="tourPrice" required>
+                <input type="number" class="form-control focus-ring focus-ring-success" id="tourPrice" name="price" required>
             </div>
-            <button type="submit" class="btn button w-100">ثبت تور</button>
+            <div class="mb-3">
+                <label for="tourPrice" class="form-label">ظرفیت</label>
+                <input type="number" class="form-control focus-ring focus-ring-success" id="tourPrice" name="capacity" required>
+            </div>
+            <input type="submit" class="btn button w-100" value="ثبت تور">
         </form>
     </div>
     <hr class="hr">
@@ -143,7 +152,6 @@
             <h1 style="color: #4b964d;">در اینجا میتوانید نظرات کاربران را مشاهده کنید</h1>
             <h4 style="color: #4b964d;">کلیک کنید تا به صفحه مرتبط بروید</h4>
             <div class="comments">
-                {%for comment in comments %}
                 <ul>
                    <li>
                     <a href=""></a>

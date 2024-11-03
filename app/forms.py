@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, IntegerField, DecimalField, Date
 from wtforms.validators import DataRequired
 
 class EventFilterForm(FlaskForm):
+    name = StringField('Name')
     place = StringField('Place')
     start_date = DateField('Start Date', format='%Y-%m-%d', validators=[DataRequired()])
     end_date = DateField('End Date', format='%Y-%m-%d', validators=[DataRequired()])
