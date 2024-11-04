@@ -14,6 +14,7 @@ class Event(db.Model):
     price = db.Column(db.Float, nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    cover_photo = db.Column(db.String(200), nullable=True)
     
     # One-to-many relationship with comments
     comments = db.relationship('Comment', backref='event', lazy=True)

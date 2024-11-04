@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from datetime import datetime
-
+import jdatetime
 from app.main import bp
 from app.extensions import db
 from app.models.events import Event
@@ -53,11 +53,12 @@ def add_event_post():
     name = request.form.get('name')
     place = request.form.get('place')
     details = request.form.get('details')
-    begin_date = datetime.strptime(request.form.get('begin_date'), '%Y-%m-%d')
-    end_date = datetime.strptime(request.form.get('end_date'), '%Y-%m-%d')
+    begin_date = datetime.strptime(request.form.get('begin_date'), '%Y/%m/%d')
+    end_date = datetime.strptime(request.form.get('end_date'), '%Y/%m/%d')
     price = request.form.get('price')
     capacity = request.form.get('capacity')
-    new_event = Event(name=name, place=place, details=details, begin_date=begin_date, end_date=end_date, price=price, capacity=capacity)
+    cover_photo = request.form.get('cover_photo')
+    new_event = Event(name=name, place=place, details=details, begin_date=begin_date, end_date=end_date, price=price, capacity=capacity, cover_photo=cover_photo)
     db.session.add(new_event)
     db.session.commit()
     return redirect(url_for('main.index'))
