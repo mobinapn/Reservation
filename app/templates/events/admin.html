@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پنل ادمین - افزودن تور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jalali-moment/2.22.0/jalali-moment.min.js"></script>
     <style>
         @font-face {
             font-family: face;
@@ -14,6 +15,8 @@
             direction: rtl;
             font-family: face; 
             padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
         }
         .container {
             display: flex;
@@ -65,34 +68,63 @@
             border-radius: 8px;
         }
         textarea:focus {
-    transform: translateY(-2px);
+            transform: translateY(-2px);
         }
         .hr{
             width: 80%;
             border-top: 5px solid #4b964d;
         }
         .comments ul {
-    list-style-type: none;
-    padding: 0;
+            list-style-type: none;
+            padding: 0;
         }
 
         .comments li {
-    margin: 10px 0;
-    list-style-type: none; 
+            margin: 10px 0;
+            list-style-type: none; 
         }
         .comments a {
-    text-decoration: none;
-    color: #ffc107;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+            text-decoration: none;
+            color: #ffc107;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
-    .comments a:hover {
-    background-color: #b48b12;
-    color: #ffffff;
+        .comments a:hover {
+            background-color: #b48b12;
+            color: #ffffff;
+        }
+        .file-input {
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .custom-file-label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #ffc107;
+            color: #fff;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .file-chosen-text {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+
+        .file-input:focus + .custom-file-label,
+        .file-input:hover + .custom-file-label {
+            background-color: #b48b12;
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
+    
 </head>
 <body>
 <div class="container">
@@ -115,33 +147,29 @@
                 <label for="tourDestinations" class="form-label">مقاصد</label>
                 <input type="text" class="focus-ring focus-ring-success  form-control" id="tourDestinations" name="place" required>
             </div>
-            <!-- <div class="mb-3">
-                <label for="tourDuration" class="form-label">مدت سفر</label>
-                <input type="text" class="form-control focus-ring focus-ring-success" id="tourDuration" name="" >
-            </div> -->
             <div class="mb-3">
-                <label for="tourDate" class="form-label">تاریخ حرکت</label>
-                <input type="date" class="form-control focus-ring focus-ring-success" id="tourDate" name="begin_date"required>
+                <label for="tourImages" class="form-label ">تصاویر تور</label><br>
+                <input type="file" class="form-control file-input" id="tourImages" multiple required data-text="انتخاب فایل">
+                <label for="tourImages" class="custom-file-label">انتخاب فایل</label>
+                <span class="file-chosen-text">هیچ فایلی انتخاب نشده</span>
+            </div>
+            
+            <div class="mb-3">
+                <label for="tourDateStart" class="form-label">تاریخ حرکت</label>
+                <input   data-jdp class="form-control focus-ring focus-ring-success" id="tourDateStart" name="begin_date" required>
             </div>
             <div class="mb-3">
-                <label for="tourDate" class="form-label">تاریخ  برگشت</label>
-                <input type="date" class="form-control focus-ring focus-ring-success" id="tourDate" name="end_date" required>
+                <label for="tourDateEnd" class="form-label">تاریخ برگشت</label>
+                <input  data-jdp class="form-control focus-ring focus-ring-success" id="tourDateEnd" name="end_date" required>
+               
             </div>
-            <!-- <div class="mb-3">
-                <label for="tourAttractions" class="form-label">جاذبه‌ها (با ویرگول جدا کنید)</label>
-                <textarea class="form-control focus-ring focus-ring-success" id="tourAttractions" rows="3" name="" ></textarea>
-            </div> -->
-            <!-- <div class="mb-3">
-                <label for="tourEssentials" class="form-label">لوازم ضروری (با ویرگول جدا کنید)</label>
-                <textarea class="form-control focus-ring focus-ring-success" id="tourEssentials" rows="3" ></textarea>
-            </div> -->
             <div class="mb-3">
                 <label for="tourPrice" class="form-label">قیمت</label>
                 <input type="number" class="form-control focus-ring focus-ring-success" id="tourPrice" name="price" required>
             </div>
             <div class="mb-3">
-                <label for="tourPrice" class="form-label">ظرفیت</label>
-                <input type="number" class="form-control focus-ring focus-ring-success" id="tourPrice" name="capacity" required>
+                <label for="tourCapacity" class="form-label">ظرفیت</label>
+                <input type="number" class="form-control focus-ring focus-ring-success" id="tourCapacity" name="capacity" required>
             </div>
             <input type="submit" class="btn button w-100" value="ثبت تور">
         </form>
@@ -158,44 +186,28 @@
                    </li> 
                 </ul>
             </div>
+        </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('tourForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const tourData = {
-                name: document.getElementById('tourName').value,
-                description: document.getElementById('tourDescription').value,
-                destinations: document.getElementById('tourDestinations').value,
-                duration: document.getElementById('tourDuration').value,
-                date: document.getElementById('tourDate').value,
-                attractions: document.getElementById('tourAttractions').value.split(','),
-                essentials: document.getElementById('tourEssentials').value.split(','),
-                price: document.getElementById('tourPrice').value
-            };
-            fetch('/api/tours', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(tourData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                alert('تور با موفقیت ثبت شد!');
-                document.getElementById('tourForm').reset();
-            })
-            .catch((error) => {
-                alert('خطا در ثبت تور. لطفا دوباره تلاش کنید.');
-                console.error('Error:', error);
-            });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+    <script>
+        document.getElementById("tourImages").addEventListener("change", function() {
+            const fileCount = this.files.length;
+            const fileChosenText = document.querySelector(".file-chosen-text");
+            if (fileCount > 0) {
+                fileChosenText.textContent = `${fileCount} فایل انتخاب شده`;
+            } else {
+                fileChosenText.textContent = "هیچ فایلی انتخاب نشده";
+            }
         });
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+        jalaliDatepicker.startWatch({
+  minDate: "attr",
+  maxDate: "attr"
+}); 
+/* Below is a js demo | you don't need to use */
+
+    </script>
+    
 </body>
 </html>
