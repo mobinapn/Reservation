@@ -6,6 +6,7 @@
 
 {% block css %}
 <link href="../../static/accounts/css/events.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css">
 {% endblock %}
 
 {% block head %}
@@ -88,11 +89,11 @@
                         <form id="reservationForm" action="/submit-reservation" method="POST">
                             <div class="form-group mb-3">
                                 <label for="tourDate">انتخاب تاریخ</label>
-                                <input type="date" class="form-control" id="tourDate" name="tourDate" required>
+                                <input data-jdp class="form-control  focus-ring focus-ring-success" id="tourDate" name="tourDate" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="guests">تعداد مهمانان</label>
-                                <input type="number" class="form-control" id="guests" name="guests" min="1" max="20" required>
+                                <input type="number" class="form-control  focus-ring focus-ring-success" id="guests" name="guests" min="1" max="20" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label>مجموع خرید شما</label><br>
@@ -114,7 +115,7 @@
                 
                         <div class="form-group">
                             <label for="comment">نظر شما:</label>
-                            <textarea id="comment" name="comment" class="form-control" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
+                            <textarea id="comment" name="comment" class="form-control  focus-ring focus-ring-success" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
                         </div>
                 
                         <button type="submit" class="btn mt-5">ارسال نظر</button>
@@ -123,104 +124,12 @@
                 
             
         </div>
+        <script type="text/javascript" src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
         <script>
-        // Define tour dates in the desired format
-    const tourDates = [
-        "2 آذر 1403", "9 آذر 1403", "16 آذر 1403", "22 آذر 1403", "23 آذر 1403", 
-        "30 آذر 1403", "2 دی 1403"
-    ];
-
-    // Populate the dropdown with tour dates
-    const dateDropdown = document.getElementById('tourDate');
-    tourDates.forEach(function(date) {
-        const option = document.createElement('option');
-        option.value = date; // Keep the value in the display format or set a different value if needed
-        option.textContent = date;
-        dateDropdown.appendChild(option);
-    });
-            document.getElementById('reservationForm').addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevent form from submitting
-        
-         
-                const tourDate = document.getElementById('tourDate').value;
-                const guests = document.getElementById('guests').value;
-                const contactInfo = document.getElementById('contactInfo').value;
-                const additionalInfo = document.getElementById('additionalInfo').value;
-        
-                // Basic validation
-                if (!tourDate || guests < 1 || !contactInfo) {
-                    alert('لطفا همه فیلدهای ضروری را پر کنید.');
-                    return;
-                }
-        
-                // Data to send to the backend
-                const reservationData = {
-                    tourDate: tourDate,
-                    guests: guests,
-                    contactInfo: contactInfo,
-                    additionalInfo: additionalInfo
-                };
-        
-                // Send POST request to backend
-                fetch('/submit-reservation', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(reservationData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error submitting reservation');
-                    }
-                })
-                .then(data => {
-                    alert('رزرو شما با موفقیت ثبت شد!');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('مشکلی در ارسال فرم وجود دارد.');
-                });
-            });
-            document.getElementById('commentForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const comment = document.getElementById('comment').value;
-
-    // Create comment element
-    const commentElement = document.createElement('div');
-    commentElement.classList.add('comment');
-    commentElement.innerHTML = `
-        <strong>${username}</strong>: <p>${comment}</p>
-        <button class="replyBtn">پاسخ از مدیر</button>
-        <div class="adminResponse" style="display:none;">
-            <strong>پاسخ مدیر:</strong> <span class="responseText"></span>
-        </div>
-    `;
-
-    
-    document.getElementById('commentsList').appendChild(commentElement);
-
-
-    this.reset();
-});
-
-
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('replyBtn')) {
-        const responseText = prompt("پاسخ مدیر را وارد کنید:");
-        if (responseText) {
-            const adminResponse = event.target.parentNode.querySelector('.adminResponse');
-            const responseSpan = adminResponse.querySelector('.responseText');
-            responseSpan.textContent = responseText;
-            adminResponse.style.display = 'block';
-        }
-    }
-});
-
+            jalaliDatepicker.startWatch({
+  minDate: "attr",
+  maxDate: "attr"
+}); 
         </script>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
