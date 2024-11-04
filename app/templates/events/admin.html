@@ -133,7 +133,7 @@
     </div>
     <div class="form-container">
         <h2 class="form-title">افزودن تور جدید</h2>
-        <form action="{{url_for('main.add_event_post')}}" method="post">
+        <form action="{{url_for('main.add_event_post')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="mb-3">
                 <label for="tourName" class="form-label">نام تور</label>

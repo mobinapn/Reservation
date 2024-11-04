@@ -5,6 +5,12 @@ from app.main import bp
 from app.extensions import db
 from app.models.events import Event
 from app.forms import EventFilterForm
+from werkzeug.utils import secure_filename
+import os
+from flask import current_app, flash
+
+
+
 
 
 @bp.route('/')
@@ -32,7 +38,8 @@ def index():
 
 
     # events = events.all()
-    return render_template('home.html')
+    events = Event.query.all()
+    return render_template('home.html', events=events)
 
 @bp.route('/search', methods=['GET', 'POST'])
 def search():
@@ -50,6 +57,8 @@ def add_event():
 
 @bp.route('/admin_panel', methods=['POST'])
 def add_event_post():
+    UPLOAD_FOLDER = os.path.join(current_app.root_path, 'static/img/events') 
+    current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     name = request.form.get('name')
     place = request.form.get('place')
     details = request.form.get('details')
@@ -57,8 +66,27 @@ def add_event_post():
     end_date = datetime.strptime(request.form.get('end_date'), '%Y/%m/%d')
     price = request.form.get('price')
     capacity = request.form.get('capacity')
-    cover_photo = request.form.get('cover_photo')
-    new_event = Event(name=name, place=place, details=details, begin_date=begin_date, end_date=end_date, price=price, capacity=capacity, cover_photo=cover_photo)
-    db.session.add(new_event)
-    db.session.commit()
+    cover_photo_file = request.files.get('cover_photo')
+    if cover_photo_file and cover_photo_file.filename:
+        filename = secure_filename(cover_photo_file.filename)
+        cover_photo_path = os.path.join(UPLOAD_FOLDER, filename)
+        
+        try:
+            # Ensure directory exists
+            os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
+            cover_photo_file.save(cover_photo_path)
+            print("File saved at:", cover_photo_path)  # Debugging line
+        except Exception as e:
+            print("File save error:", e)
+            flash("An error occurred while saving the cover photo.", "danger")
+            cover_photo_path = None  # Reset path in case of error
+    new_event = Event(name=name, place=place, details=details, begin_date=begin_date, end_date=end_date, price=price, capacity=capacity, cover_photo=filename)
+    try:
+        db.session.add(new_event)
+        db.session.commit()
+        flash("Event created successfully!", "success")
+    except Exception as e:
+        db.session.rollback()
+        print("Database error:", e)
+        flash("An error occurred while saving the event to the database.", "danger")
     return redirect(url_for('main.index'))
