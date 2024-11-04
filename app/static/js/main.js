@@ -56,3 +56,29 @@ $("#li3").on({
         },500,"linear")
     }
 })
+//prof
+
+// Preview selected image 
+document.getElementById('profile-image').addEventListener('change', function(event) {
+         const imagePreview = document.getElementById('image-preview');     
+         const imageElement = document.getElementById('image-preview-element');     
+         const file = event.target.files[0];     
+         if (file) {         
+            const reader = new FileReader();         
+            reader.onload = function(e) {             
+                imageElement.src = e.target.result;             
+                imagePreview.style.display = 'block';         
+            };         reader.readAsDataURL(file);     
+        } else {         
+            imagePreview.style.display = 'none';     
+        } 
+    }); 
+    // Remove selected image 
+    document.getElementById('remove-image').addEventListener('click', function() {     
+        const fileInput = document.getElementById('profile-image');     
+        const imagePreview = document.getElementById('image-preview');     
+        fileInput.value = '';  
+        // Clear file input     
+        imagePreview.style.display = 'none';     
+        alert('تصویر فعلی پاک شد.'); 
+    });
