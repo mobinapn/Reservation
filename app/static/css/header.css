@@ -101,15 +101,17 @@ header>div.search>div.log-in>div.log>div.text{
     border-left: 1.5px solid #4b964d;
     display: inline-block;
 }
-header>div.search>div.log-in>div.log>div.text>p{
+header>div.search>div.log-in>div.log>div.text>a>p{
 font-size: 12px;
 padding-left: 5px;
+color: black;
 }
-header>div.search>div.log-in>div.log>p{
+header>div.search>div.log-in>div.log>a>p{
 font-size: 12px;
 display: inline-block;
 vertical-align: top;
 padding-top: 13px;
+color: black;
 
 }
 header>div.menu{
