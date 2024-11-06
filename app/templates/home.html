@@ -87,7 +87,7 @@
 					<h2>{{ event.name }}</h2>
 					<p class="price">{{ event.price }}</p>
 					<p>{{ event.description }}</p>
-					<button class="buy">رزرو</button>
+					<button onclick="window.location.href='{{ url_for('main.event_details', event_id=event.id) }}'" class="buy">رزرو</button>
 				</div>
 				{% endfor %}
 			</div>

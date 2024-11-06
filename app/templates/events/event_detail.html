@@ -42,56 +42,32 @@
           <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="container-md event-contaimer">
-        <div class="mt-4 ">
-            <span ><ion-icon class="pr-5" name="location-outline"></ion-icon></span>
-        <a href="#" class="loc">کاشان، آران بیدگل، کویر مرنجاب</a>
+    <div class="container-md event-container">
+        <div class="mt-4">
+            <span><ion-icon class="pr-5" name="location-outline"></ion-icon></span>
+            <a href="#" class="loc">{{ event.place }}</a>
         </div>
-        <div >
-        <h3 class="text-center mt-5 text">تور کویر مرنجاب</h3>
         
-        <h4 class="px-5 ">تور کویر مرنجاب در یک نگاه</h4>
-        <p> در تور کویر مرنجاب سفری یک روزه خواهیم داشت به شهرستان آران و بیدگل استان اصفهان و یک کویرنوردی بی‌نظیر و هیجان انگیز را تجربه می‌کنیم. این کویر درشمال آران و بیدگل قرار دارد و از سمت شمال به دریاچه نمک، قسمت غربی آن به کویر مسیله و دریاچه‌های نمک حوض سلطان و از شرق به کویر بند ریگ و پارک ملی کویر منتهی می‌شود.
-            در تور یک روزه کویر مرنجاب از تپه‌های ماسه‌ای بلند و درختان تاغ دیدن می‌کنیم و یک رمل نوردی تکرارنشدنی خواهیم داشت. این تور در دسته تورهای طبیعتگردی یک روزه قرار دارد و برای دیدن سایر تورهای کلوت می‌توانید به صفحه اصلی وبسایت ما مراجعه کنید.</p>
+        <div>
+            <h3 class="text-center mt-5 text">{{ event.name }}</h3>
+            <h4 class="px-5">تور {{ event.name }} در یک نگاه</h4>
+            <p>{{ event.details }}</p>
+            
             <ul class="pb-5">
-                <li class="">مقاصد: کاشان-آران بیدگل</li>
-                <li class="">مدت سفر: 1 روزه</li>
-                <li class="">تاریخ و روز حرکت: جمعه 2 آذر 1403</li>
-                <li class="">تاریخ‌های بعدی: 9، 16، 22، 23، 30 آذر</li>
-                <li class="">وسیله نقلیه اصلی: وسیله نقلیه توریستی با توجه به حد نصاب</li>
-                <li class="">تعداد وعده غذایی: 1 وعده با تورکت / 1 وعده با گردشگ</li>
-                <li class="">درجه سختی: 1 از 5</li>
-                <li class="">محل حرکت: تهران ‐ خیابان فاطمی ‐ مقابل هتل لاله</li>
-                <li class="">زمان حرکت: ساعت 5:00 صبح</li>
-                <li class="">کد سفر: 21672</li>
-
-            </ul>
-            <ul class="pb-5">
-                <p class="h6">جاذبه‌های تور یک روزه کویر مرنجاب:</p>
-                <li>منطقه گردشگری مرنجاب</li>
-                <li>بازدید از شیب خطب شکن</li>
-                <li>گذر از چاه دست کن</li>
-                <li>پیمایش رمل‌های کویری</li>
-                <li>بازدید از دریاچه نمک</li>
-            </ul>
-            <ul>
-                <p class="h6">لوازم ضروری تور مرنجاب:</p>
-                <li>کارت شناسایی</li>
-                <li>کوله‌ی یک روزه</li>
-                <li>داروی مورد نیاز</li>
-                <li>کفش پیاده‌روی در طبیعت</li>
-                <li>لوازم بهداشتی شخصی</li>
+                <li>مقاصد: {{ event.place }}</li>
+                <li>مدت سفر: 1 روزه</li>
+                <li>تاریخ شروع: {{ event.begin_date.strftime('%Y/%m/%d') }}</li>
+                <li>تاریخ پایان: {{ event.end_date.strftime('%Y/%m/%d') }}</li>
+                <li>ظرفیت: {{ event.capacity }} نفر</li>
+                <li>هزینه: {{ event.price }} تومان</li>
             </ul>
         </div>
+    </div>
            
                 <div class="card container  mt-5">
                     <div class="card-body">
                         <h4 class="card-title text-center">رزرو تور</h4>
                         <form id="reservationForm" action="/submit-reservation" method="POST">
-                            <div class="form-group mb-3">
-                                <label for="tourDate">انتخاب تاریخ</label>
-                                <input data-jdp class="form-control  focus-ring focus-ring-success" id="tourDate" name="tourDate" required>
-                            </div>
                             <div class="form-group mb-3">
                                 <label for="guests">تعداد مهمانان</label>
                                 <input type="number" class="form-control  focus-ring focus-ring-success" id="guests" name="guests" min="1" max="20" required>
@@ -105,24 +81,60 @@
                     </div>
                 </div>
      
-                <div class="container   commentt mt-5" id="commentsSection">
-                    <h3>نظرات کاربران</h3>
-                    <div id="commentsList" class="mb-4"></div>
-                    <form id="commentForm" class="border p-3 rounded bg-light">
-                        <div class="form-group">
-                          <!-- <label for="username">نام شما:</label>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="نام خود را وارد کنید" required>-->
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="comment">نظر شما:</label>
-                            <textarea id="comment" name="comment" class="form-control  focus-ring focus-ring-success" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
-                        </div>
-                
-                        <button type="submit" class="btn mt-5 buttons">ارسال نظر</button>
-                        <button type="submit" class="btn mt-5 buttons"> <a>برای ثبت نظر خود لطفا وارد حساب کاربری شوید</a></button>
-                    </form>
-                </div>
+                <div class="container comment-section mt-5" id="commentsSection">
+					<h3>نظرات کاربران</h3>
+					<div id="commentsList" class="mb-4">
+						{% if comments %}
+							{% for comment in comments %}
+								<div class="comment p-3 mb-3 border rounded">
+									<p><strong>{{ comment.user.username }}</strong> - {{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+									<p>{{ comment.content }}</p>
+                    
+									<!-- Button to show reply form -->
+									<button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#replyForm{{ comment.id }}">Reply</button>
+
+									<div id="replyForm{{ comment.id }}" class="collapse">
+										<form method="POST" class="border p-3 rounded bg-light mt-2">
+											<input type="hidden" name="parent_id" value="{{ comment.id }}">
+											<div class="form-group">
+												<textarea name="comment" class="form-control focus-ring focus-ring-success" placeholder="Your reply..." rows="3" required></textarea>
+											</div>
+											<button type="submit" class="btn mt-3 buttons">Send Reply</button>
+										</form>
+									</div>
+
+									<!-- Display replies -->
+									{% if comment.replies %}
+										<div class="replies mt-3">
+											{% for reply in comment.replies %}
+												<div class="reply p-2 mb-2 bg-light border rounded">
+													<p><strong>{{ reply.user.username }}</strong> - {{ reply.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+													<p>{{ reply.content }}</p>
+												</div>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+							{% endfor %}
+						{% else %}
+							<p>No comments yet. Be the first to comment!</p>
+						{% endif %}
+					</div>
+
+					{% if session.get('user_id') %}
+						<!-- Main Comment Form -->
+						<form id="commentForm" method="POST" class="border p-3 rounded bg-light">
+							<div class="form-group">
+								<label for="comment">نظر شما:</label>
+								<textarea id="comment" name="comment" class="form-control focus-ring focus-ring-success" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
+							</div>
+							<button type="submit" class="btn mt-5 buttons">ارسال نظر</button>
+						</form>
+					{% else %}
+						<p>Please <a href="{{ url_for('accounts.login') }}">log in</a> to comment.</p>
+					{% endif %}
+				</div>
+
                 
             
         </div>

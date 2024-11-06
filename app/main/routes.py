@@ -3,6 +3,7 @@ from datetime import datetime
 from app.main import bp
 from app.extensions import db
 from app.models.events import Event
+from app.models.comments import Comment
 from app.forms import EventFilterForm
 from werkzeug.utils import secure_filename
 import os
@@ -49,6 +50,42 @@ def search():
     else:
         events = Event.query.all()  # If no search term, return all events
     return render_template('home.html', events=events)
+
+@bp.route('/event_detail', methods=['GET', 'POST'])
+def event_details():
+    event_id = request.args.get('event_id', type=int)  # Get event_id from query parameters
+    if event_id is None:
+        # Handle the case where event_id is missing
+        return "Event ID is required", 400
+    
+    # Fetch the event from the database
+    event = Event.query.get(event_id)
+    
+     # Fetch comments for this event
+    comments = Comment.query.filter_by(event_id=event_id, parent_id=None).order_by(Comment.created_at.desc()).all()
+    if event is None:
+        return "Event not found", 404
+    
+    if request.method == 'POST':
+        if 'user_id' in session:  # Ensure the user is logged in
+            user_id = session['user_id']
+            content = request.form.get('comment')
+            parent_id = request.form.get('parent_id')  # Handle reply if there's a parent comment
+
+            new_comment = Comment(
+                content=content,
+                user_id=user_id,
+                event_id=event_id,
+                parent_id=parent_id if parent_id else None
+            )
+
+            db.session.add(new_comment)
+            db.session.commit()
+            flash("Your comment has been added.", "success")
+            return redirect(url_for('event_detail', event_id=event_id))  # Redirect to avoid re-submitting the form
+        else:
+            flash("Please log in to submit a comment.", "warning")
+    return render_template('events/event_detail.html', event=event, comments=comments)
 
 @bp.route('/admin_panel', methods=['GET'])
 def add_event():
