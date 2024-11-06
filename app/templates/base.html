@@ -27,14 +27,16 @@
                 <input type="search" placeholder="جستجو" >
             </div>
             {% if current_user.is_authenticated %}
-            <div class="log-in">
-                <div class="log">
-                    <p>حساب کاربری</p>
+            <a href="{{url_for('accounts.profile')}}">
+                <div class="log-in">
+                    <div class="log">
+                        <p>حساب کاربری</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-            </div>
+            </a>
             {% else %}
             <div class="log-in">
                 <div class="log">

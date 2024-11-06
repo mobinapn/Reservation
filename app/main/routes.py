@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for
 from datetime import datetime
-import jdatetime
 from app.main import bp
 from app.extensions import db
 from app.models.events import Event

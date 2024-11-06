@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+حساب کاربری
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="../../static/accounts/css/profile.css">
+{% endblock %}
+
+{% block head %}
+اطلاعات شما
+{% endblock %}
+
+{% block content %}
+                <div class="profile-content">
+                    <div class="profile-info"> 
+                        <div class="profile-form-container">
+                             <h2 class="profile-form-title">ویرایش پروفایل</h2>
+                             <form action="{{url_for('accounts.profile_post')}}" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                <label for="first-name">نام:</label>
+                                <input type="text" id="first-name" name="firstname" placeholder="نام" {% if current_user.firstname %}value="{{ current_user.firstname }}"{% endif %}>
+                                <label for="last-name">نام خانوادگی:</label>
+                                <input type="text" id="last-name" name="lastname" placeholder="نام خانوادگی" {% if current_user.lastname %}value="{{ current_user.lastname }}"{% endif %}>
+                                <label for="phone-number">شماره تلفن:</label>
+                                <input type="text" id="phone-number" name="phone" placeholder="شماره تلفن" {% if current_user.phone %}value="{{ current_user.phone }}"{% endif %} disabled>
+                                <label for="gender">جنسیت:</label>         
+                                <select id="gender" name="gender">
+                                    {% if not current_user.gender %}
+                                    <option value="" selected>جنسیت شما</option>
+                                    {% endif %}
+                                    <option value="male" {% if current_user.gender == 'male' %}selected{% endif %}>مرد</option>
+                                    <option value="female" {% if current_user.gender == 'female' %}selected{% endif %}>زن</option>
+                                    <option value="other" {% if current_user.gender == 'other' %}selected{% endif %}>سایر</option>
+                                </select>
+                                <label for="birth-date">تاریخ تولد:</label>
+                                <input type="date" id="birth-date" name="birthdate" placeholder="mm/dd/yyyy" {% if current_user.birthdate %}value="{{ current_user.birthdate }}"{% endif %}>
+                                <label for="profile-image">تصویر پروفایل:</label>
+                                {% if current_user.image %}
+                                <div class="image-preview" id="image-preview">
+                                    <img src="{{ url_for('static', filename='uploads/img/profiles/' + current_user.image) }}" alt="{{ current_user.image }} Profile Image" id="image-preview-element">                                </div>
+                                <a href="{{url_for('accounts.remove_profile_photo')}}" id="remove-image">پاک کردن تصویر فعلی</a><br>
+                                {% else %}
+                                <img src="../../static/accounts/img/user.png" alt="User Profile Image" id="image-preview-element">
+                                {% endif %}
+                                <input type="file" id="profile-image" name="file" accept="image/*">         
+                                <label for="education">تحصیلات:</label>
+                                <select id="education" name="education">
+                                    {% if not current_user.education %}
+                                    <option value="" selected>تحصیلات شما</option>
+                                    {% endif %}
+                                    <option value="lower than diploma" {% if current_user.education == 'lower than diploma' %}selected{% endif %}>پایین تر از دیپلم</option>
+                                    <option value="diploma" {% if current_user.education == 'diploma' %}selected{% endif %}>دیپلم</option>
+                                    <option value="associate degree" {% if current_user.education == 'associate degree' %}selected{% endif %}>کاردانی</option>
+                                    <option value="bachelor" {% if current_user.education == 'bachelor' %}selected{% endif %}>کارشناسی</option>
+                                    <option value="master degree" {% if current_user.education == 'master degree' %}selected{% endif %}>کارشناسی ارشد</option>
+                                    <option value="phd" {% if current_user.education == 'phd' %}selected{% endif %}>دکترا</option>         
+                                </select>
+                                <label for="job">شغل:</label>         
+                                <input type="text" id="job" name="job" placeholder="شغل" {% if current_user.job %}value="{{ current_user.job }}"{% endif %}>
+                                <button type="submit" class="submit-btn">بروزرسانی</button>
+                            </form> 
+                        </div> 
+                        
+                </div>
+                <div class="profile-reservations"> 
+                        <h2>تورهای شما</h2> 
+                        <div class="reservation-item"> 
+                            <img class="tour" src="../../static/img/slider/isfahan.webp" alt="">
+                            <div class="textt">
+                                <p class="info"><strong>نام تور:</strong> تور پاریس</p> 
+                                <p class="info"><strong>تاریخ:</strong> 1403-05-02</p>
+                                <p class="info"><strong>مبلغ:</strong> 34000000</p>
+                            </div>
+                        </div> 
+                        <div class="reservation-item">
+                            <img class="tour" src="../../static/img/slider/isfahan.webp" alt="">
+                            <div class="textt"> 
+                                <p class="info"><strong>نام تور:</strong> تور ماسال</p> 
+                                <p class="info"><strong>تاریخ:</strong> 1403-08-09</p>
+                                <p class="info"><strong>مبلغ:</strong> 34000000</p> 
+                            </div>    
+                        </div> 
+
+                </div> 
+                 
+            </div>
+            <script src="../../static/js/main.js"></script>  
+{% endblock %}

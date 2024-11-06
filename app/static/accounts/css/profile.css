@@ -121,7 +121,6 @@
 } 
 /* Image Preview Styling */ 
 .image-preview {     
-    display: none;     
     margin-bottom: 15px; 
 } 
 .image-preview img {     
