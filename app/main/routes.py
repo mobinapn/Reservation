@@ -8,6 +8,8 @@ from app.forms import EventFilterForm
 from werkzeug.utils import secure_filename
 import os
 from flask import current_app, flash
+from flask import session
+
 
 
 

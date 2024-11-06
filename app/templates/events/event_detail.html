@@ -121,9 +121,10 @@
 						{% endif %}
 					</div>
 
-					{% if session.get('user_id') %}
+					{% if current_user.is_authenticated %}
 						<!-- Main Comment Form -->
 						<form id="commentForm" method="POST" class="border p-3 rounded bg-light">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 							<div class="form-group">
 								<label for="comment">نظر شما:</label>
 								<textarea id="comment" name="comment" class="form-control focus-ring focus-ring-success" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
