@@ -8,10 +8,20 @@ body{
     font-family: face;
     direction: rtl;
 }
-ul li::marker {
-    color:#ffc107;
-    font-size: 1.4em; 
-}
+.custom-list {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .custom-list {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  .custom-list::marker {
+    color: #ffc107; 
+  }
 .loc{
     text-decoration: none;
     color: #ccc7cc;
@@ -27,13 +37,13 @@ ul li::marker {
     flex: 1;
     min-width: 300px;
     max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.16);
     margin-bottom: 25px;
 }
 .card:hover {
     transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
 }
 
@@ -57,17 +67,9 @@ ul li::marker {
 .buttons:hover {
     background-color: #a38a3e;
     text-decoration: none;
-}
-#commentsSection {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
+    color: white; ;
 }
 
-.comment {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-}
 
 .replyBtn {
     background-color: #ffc107;
@@ -82,7 +84,9 @@ ul li::marker {
 .commentt {
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 25px;
     margin-bottom: 25px;
+    padding: 10px;
 }
 .commentt:hover {
     transform: scale(1.02);
