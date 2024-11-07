@@ -82,7 +82,6 @@
 				<div class="cart">
 					<!-- Display event cover photo -->
 					<img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" alt="{{ event.name }}">
-					<p>Image URL: {{ image_url }}</p>  <!-- Debugging line -->
 					<!-- Display event name and price -->
 					<h2>{{ event.name }}</h2>
 					<p class="price">{{ event.price }}</p>

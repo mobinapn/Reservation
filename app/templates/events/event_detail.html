@@ -18,7 +18,7 @@
     
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" class="d-block w-100" alt="...">
+            <img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" class="d-block w-100" alt="{{ event.name }}">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
