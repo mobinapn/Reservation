@@ -15,22 +15,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-md mt-4">
-    <div id="carouselExampleIndicators" class="carousel slide custom-carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
+    
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="../../static/accounts/img/779569a4-4b49-433d-b81e.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="../../static/accounts/img/download.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="../../static/accounts/img/download (1).jpg" class="d-block w-100" alt="...">
+            <img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" class="d-block w-100" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -63,7 +51,7 @@
             </ul>
         </div>
     </div>
-           
+<!--            
                 <div class="card container  mt-5">
                     <div class="card-body">
                         <h4 class="card-title text-center">رزرو تور</h4>
@@ -78,8 +66,8 @@
                             </div>
                             <button type="submit" class="btn w-100 buttons">افزودن به سبد خرید </button>
                         </form>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div> -->
      
                 <div class="container comment-section mt-5" id="commentsSection">
 					<h3>نظرات کاربران</h3>
@@ -117,7 +105,7 @@
 								</div>
 							{% endfor %}
 						{% else %}
-							<p>No comments yet. Be the first to comment!</p>
+							<p>هیچ نظری نیست ، اولین کسی باشید که نظر میدهید</p>
 						{% endif %}
 					</div>
 

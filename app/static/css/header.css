@@ -10,6 +10,7 @@
     border: none;
     font-family: iransans;
     list-style: none;
+    
 }
 div.head{
     width: 100%;
@@ -98,7 +99,7 @@ header>div.search>div.log-in>div.log>i{
     color: #4b964d;
 }
 header>div.search>div.log-in>div.log>div.text{
-    border-left: 1.5px solid #4b964d;
+    
     display: inline-block;
 }
 header>div.search>div.log-in>div.log>div.text>a>p{
