@@ -15,21 +15,13 @@
 {% endblock %}
 
 {% block content %}
-    
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" class="d-block w-100" alt="...">
-          </div>
+<div class="container text-center my-3">
+    <div class="row justify-content-center">
+      <div class="col-10 col-md-8 col-lg-6">
+            <img src="{{ url_for('static', filename='img/events/' + event.cover_photo) }}" class="img-fluid" alt="event Image">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
     </div>
+  </div>
     <div class="container-md event-container">
         <div class="mt-4">
             <span><ion-icon class="pr-5" name="location-outline"></ion-icon></span>
@@ -42,12 +34,12 @@
             <p>{{ event.details }}</p>
             
             <ul class="pb-5">
-                <li>مقاصد: {{ event.place }}</li>
-                <li>مدت سفر: 1 روزه</li>
-                <li>تاریخ شروع: {{ event.begin_date.strftime('%Y/%m/%d') }}</li>
-                <li>تاریخ پایان: {{ event.end_date.strftime('%Y/%m/%d') }}</li>
-                <li>ظرفیت: {{ event.capacity }} نفر</li>
-                <li>هزینه: {{ event.price }} تومان</li>
+                <li class="custom-list">مقاصد: {{ event.place }}</li>
+                <li class="custom-list">مدت سفر: 1 روزه</li>
+                <li class="custom-list">تاریخ شروع: {{ event.begin_date.strftime('%Y/%m/%d') }}</li>
+                <li class="custom-list">تاریخ پایان: {{ event.end_date.strftime('%Y/%m/%d') }}</li>
+                <li class="custom-list">ظرفیت: {{ event.capacity }} نفر</li>
+                <li class="custom-list">هزینه: {{ event.price }} تومان</li>
             </ul>
         </div>
     </div>
@@ -68,9 +60,13 @@
                         </form>
                     </div> -->
                 <!-- </div> -->
-     
-                <div class="container comment-section mt-5" id="commentsSection">
-					<h3>نظرات کاربران</h3>
+                 <!--<div class="container">
+                    <button type="submit" class=" text-center buttons">افزودن به سبد خرید </button>
+                 </div> -->
+                
+                <div class="container comment-section mt-5 commentt" id="commentsSection">
+                    <div class="card-body">
+					<h3 class=" text-center">نظرات کاربران</h3>
 					<div id="commentsList" class="mb-4">
 						{% if comments %}
 							{% for comment in comments %}
@@ -95,7 +91,7 @@
 									{% if comment.replies %}
 										<div class="replies mt-3">
 											{% for reply in comment.replies %}
-												<div class="reply p-2 mb-2 bg-light border rounded">
+												<div class="reply p-2 mb-2 border rounded">
 													<p><strong>{{ reply.user.username }}</strong> - {{ reply.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
 													<p>{{ reply.content }}</p>
 												</div>
@@ -105,8 +101,9 @@
 								</div>
 							{% endfor %}
 						{% else %}
-							<p>هیچ نظری نیست ، اولین کسی باشید که نظر میدهید</p>
+							<p class="text-body-secondary small">هیچ نظری نیست ، اولین کسی باشید که نظر میدهید</p>
 						{% endif %}
+                    </div>
 					</div>
 
 					{% if current_user.is_authenticated %}
