@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for
+from flask_login import current_user, login_required
 from datetime import datetime
 from app.main import bp
 from app.extensions import db
@@ -90,11 +91,17 @@ def event_details():
     return render_template('events/event_detail.html', event=event, comments=comments)
 
 @bp.route('/admin_panel', methods=['GET'])
+@login_required
 def add_event():
+    if current_user.role != 'admin':
+        return redirect(url_for('main.index'))
     return render_template('events/admin.html')
 
 @bp.route('/admin_panel', methods=['POST'])
+@login_required
 def add_event_post():
+    if current_user.role != 'admin':
+        return redirect(url_for('main.index'))
     UPLOAD_FOLDER = os.path.join(current_app.root_path, 'static/img/events') 
     current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     name = request.form.get('name')

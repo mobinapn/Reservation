@@ -27,10 +27,16 @@
                 <input type="search" placeholder="جستجو" >
             </div>
             {% if current_user.is_authenticated %}
-            <a href="{{url_for('accounts.profile')}}">
+            
                 <div class="log-in">
                     <div class="log">
-                        <p>حساب کاربری</p>
+                        <a href="{% if current_user.role == 'admin' %}{{url_for('main.add_event')}}{% else %}{{url_for('accounts.profile')}}{% endif %}">
+                            {% if current_user.role == 'admin' %}
+                            <p  class="likerr">پنل مدیریت</p>
+                            {% else %}
+                            <p class="linkerr">حساب کاربری</p>
+                            {% endif %}
+                        </a>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
