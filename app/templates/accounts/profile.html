@@ -25,7 +25,7 @@
                                 <input type="text" id="last-name" name="lastname" placeholder="نام خانوادگی" {% if current_user.lastname %}value="{{ current_user.lastname }}"{% endif %}>
                                 <label for="phone-number">شماره تلفن:</label>
                                 <input type="text" id="phone-number" name="phone" placeholder="شماره تلفن" {% if current_user.phone %}value="{{ current_user.phone }}"{% endif %} disabled>
-                                <label for="gender">جنسیت:</label>         
+                                <label for="gender">جنسیت:</label>
                                 <select id="gender" name="gender">
                                     {% if not current_user.gender %}
                                     <option value="" selected>جنسیت شما</option>
