@@ -51,6 +51,12 @@ ul li::marker {
     background-color: #ffc107;
     color: white;
     border-radius: 10px;
+    text-decoration: none;
+    border: none;
+}
+.buttons:hover {
+    background-color: #a38a3e;
+    text-decoration: none;
 }
 #commentsSection {
     margin-top: 20px;

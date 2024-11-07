@@ -91,7 +91,7 @@
 									<p>{{ comment.content }}</p>
                     
 									<!-- Button to show reply form -->
-									<button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#replyForm{{ comment.id }}">Reply</button>
+									<button class="m-5 p-1 buttons btn-link" data-bs-toggle="collapse" data-bs-target="#replyForm{{ comment.id }}">پاسخ</button>
 
 									<div id="replyForm{{ comment.id }}" class="collapse">
 										<form method="POST" class="border p-3 rounded bg-light mt-2">
@@ -99,7 +99,7 @@
 											<div class="form-group">
 												<textarea name="comment" class="form-control focus-ring focus-ring-success" placeholder="Your reply..." rows="3" required></textarea>
 											</div>
-											<button type="submit" class="btn mt-3 buttons">Send Reply</button>
+											<button type="submit" class="m-5 p-1 buttons">ارسال پاسخ</button>
 										</form>
 									</div>
 
@@ -129,10 +129,10 @@
 								<label for="comment">نظر شما:</label>
 								<textarea id="comment" name="comment" class="form-control focus-ring focus-ring-success" placeholder="نظر خود را بنویسید..." rows="3" required></textarea>
 							</div>
-							<button type="submit" class="btn mt-5 buttons">ارسال نظر</button>
+							<button type="submit" class="m-5 p-1 buttons">ارسال نظر</button>
 						</form>
 					{% else %}
-						<p>Please <a href="{{ url_for('accounts.login') }}">log in</a> to comment.</p>
+						<p><a class="m-5 p-1 buttons" href="{{ url_for('accounts.login') }}">برای ثبت نظر لطفا وارد شوید</a></p>
 					{% endif %}
 				</div>
 
